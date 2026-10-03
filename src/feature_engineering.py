@@ -11,7 +11,9 @@ import pandas as pd
 # File Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 CLEAN_DATA_PATH = BASE_DIR / "data" / "processed" / "clean_terai_heatwave.csv"
-ENGINEERED_DATA_PATH = BASE_DIR / "data" / "processed" / "terai_features_engineered.csv"
+ENGINEERED_CSV_PATH = BASE_DIR / "data" / "processed" / "terai_features_engineered.csv"
+ENGINEERED_PARQUET_PATH = BASE_DIR / "data" / "processed" / "terai_features_engineered.parquet"
+ENGINEERED_DATA_PATH = ENGINEERED_CSV_PATH  # Backwards compatibility
 
 
 def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
@@ -173,6 +175,33 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     # Trim warmup (14 days past) and lookahead (1 day future) boundary NaNs (315 rows total)
     df_final = df.dropna().reset_index(drop=True)
 
+    # 12. Explicit Data Type Optimization (Schema Standardization)
+    # 12.1 Datetime
+    df_final["Date"] = pd.to_datetime(df_final["Date"])
+
+    # 12.2 Categories (String Identifiers & Categoricals)
+    category_cols = ["Province", "District", "Regional_Hub", "Season", "Terai_Region"]
+    for col in category_cols:
+        df_final[col] = df_final[col].astype("category")
+
+    # 12.3 8-bit Integers (Binary flags & ordinal targets)
+    int8_cols = ["Heatwave_Flag", "Heatwave_Severity", "Tropical_Night", "Is_Western_Terai"]
+    for col in int8_cols:
+        df_final[col] = df_final[col].astype("int8")
+
+    # 12.4 32-bit Integers (Calendar integers & counters)
+    int32_cols = ["Year", "Day_of_Year", "Month", "Consecutive_Dry_Days", "Heatwave_Streak"]
+    for col in int32_cols:
+        df_final[col] = df_final[col].astype("int32")
+
+    # 12.5 64-bit Floats (Continuous physical measurements, anomalies, and regression target)
+    float64_cols = [
+        col for col in df_final.columns
+        if col != "Date" and col not in category_cols and col not in int8_cols and col not in int32_cols
+    ]
+    for col in float64_cols:
+        df_final[col] = df_final[col].astype("float64")
+
     # Deterministic Quality Assertions
     assert df_final.isnull().sum().sum() == 0, "[ERROR] Null values remain in engineered dataset!"
     assert df_final.shape == (204582, 65), f"[ERROR] Unexpected shape: {df_final.shape}"
@@ -182,19 +211,28 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
 
 def process_and_save_features(
     input_path: Path = CLEAN_DATA_PATH,
-    output_path: Path = ENGINEERED_DATA_PATH
+    output_csv_path: Path = ENGINEERED_CSV_PATH,
+    output_parquet_path: Path = ENGINEERED_PARQUET_PATH
 ) -> pd.DataFrame:
     """
-    Executes the full feature engineering pipeline from raw clean data to exported CSV.
+    Executes the full feature engineering pipeline from raw clean data to exported CSV and Parquet.
     """
     df = pd.read_csv(input_path)
     df_final = engineer_features(df)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    df_final.to_csv(output_path, index=False)
+    output_csv_path.parent.mkdir(parents=True, exist_ok=True)
 
-    file_size_mb = output_path.stat().st_size / (1024 * 1024)
-    print(f"[SUCCESS] Exported '{output_path.name}' ({df_final.shape[0]:,} rows x {df_final.shape[1]} columns, {file_size_mb:.2f} MB)")
+    # 1. Export Human-Readable CSV
+    df_final.to_csv(output_csv_path, index=False)
+    csv_size_mb = output_csv_path.stat().st_size / (1024 * 1024)
+    print(f"[SUCCESS] Exported CSV     : '{output_csv_path.name}' ({csv_size_mb:.2f} MB)")
+
+    # 2. Export Machine-Optimized Parquet (Schema & Types Preserved)
+    df_final.to_parquet(output_parquet_path, engine="pyarrow", index=False)
+    parquet_size_mb = output_parquet_path.stat().st_size / (1024 * 1024)
+    print(f"[SUCCESS] Exported Parquet : '{output_parquet_path.name}' ({parquet_size_mb:.2f} MB - {((1 - parquet_size_mb / csv_size_mb) * 100):.1f}% storage saved)")
+
+    print(f"[INFO] Final Matrix Shape  : {df_final.shape[0]:,} rows x {df_final.shape[1]} columns")
     return df_final
 
 
