@@ -1,0 +1,170 @@
+{
+  "Banke": {
+    "Province": "Lumbini",
+    "Regional_Hub": "Nepalgunj",
+    "Latitude": 28.05,
+    "Longitude": 81.62,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Bara": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Kalaiya",
+    "Latitude": 27.03,
+    "Longitude": 85.0,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Bardiya": {
+    "Province": "Lumbini",
+    "Regional_Hub": "Gulariya",
+    "Latitude": 28.23,
+    "Longitude": 81.33,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Chitwan": {
+    "Province": "Bagmati",
+    "Regional_Hub": "Bharatpur",
+    "Latitude": 27.68,
+    "Longitude": 84.43,
+    "Terai_Region": "Central Terai",
+    "Is_Western_Terai": 0
+  },
+  "Dang": {
+    "Province": "Lumbini",
+    "Regional_Hub": "Ghorahi",
+    "Latitude": 28.04,
+    "Longitude": 82.49,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Dhanusha": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Janakpur",
+    "Latitude": 26.73,
+    "Longitude": 85.92,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Jhapa": {
+    "Province": "Koshi",
+    "Regional_Hub": "Bhadrapur",
+    "Latitude": 26.54,
+    "Longitude": 88.08,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Kailali": {
+    "Province": "Sudurpashchim",
+    "Regional_Hub": "Dhangadhi",
+    "Latitude": 28.68,
+    "Longitude": 80.59,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Kanchanpur": {
+    "Province": "Sudurpashchim",
+    "Regional_Hub": "Bhimdatta",
+    "Latitude": 28.97,
+    "Longitude": 80.18,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Kapilvastu": {
+    "Province": "Lumbini",
+    "Regional_Hub": "Taulihawa",
+    "Latitude": 27.55,
+    "Longitude": 83.05,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Mahottari": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Jaleshwar",
+    "Latitude": 26.64,
+    "Longitude": 85.8,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Morang": {
+    "Province": "Koshi",
+    "Regional_Hub": "Biratnagar",
+    "Latitude": 26.45,
+    "Longitude": 87.27,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Nawalpur": {
+    "Province": "Gandaki",
+    "Regional_Hub": "Kawasoti",
+    "Latitude": 27.65,
+    "Longitude": 84.12,
+    "Terai_Region": "Central Terai",
+    "Is_Western_Terai": 0
+  },
+  "Parasi": {
+    "Province": "Lumbini",
+    "Regional_Hub": "Ramgram",
+    "Latitude": 27.53,
+    "Longitude": 83.67,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Parsa": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Birgunj",
+    "Latitude": 27.01,
+    "Longitude": 84.87,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Rautahat": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Gaur",
+    "Latitude": 26.76,
+    "Longitude": 85.28,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Rupandehi": {
+    "Province": "Lumbini",
+    "Regional_Hub": "Bhairahawa",
+    "Latitude": 27.5,
+    "Longitude": 83.45,
+    "Terai_Region": "Western Terai",
+    "Is_Western_Terai": 1
+  },
+  "Saptari": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Rajbiraj",
+    "Latitude": 26.54,
+    "Longitude": 86.75,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Sarlahi": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Malangwa",
+    "Latitude": 26.86,
+    "Longitude": 85.56,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Siraha": {
+    "Province": "Madhesh",
+    "Regional_Hub": "Lahan",
+    "Latitude": 26.65,
+    "Longitude": 86.2,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  },
+  "Sunsari": {
+    "Province": "Koshi",
+    "Regional_Hub": "Inaruwa",
+    "Latitude": 26.6,
+    "Longitude": 87.15,
+    "Terai_Region": "Eastern Terai",
+    "Is_Western_Terai": 0
+  }
+}

@@ -14,9 +14,15 @@ softclg/
 docs/
 papers/
 scratch/
+backend/
+frontend/
 Drishyan_Dahal_17624516.pdf
 download_papers_properly.py
 process_papers.py
+TOMORROW_PLAN.md
+arxiv_results.json
+comparable_papers_analysis.md
+model_selection_and_literature_mapping.md
 
 # ==============================================================================
 # Agent, Licenses & Temporary Files
@@ -29,10 +35,21 @@ process_papers.py
 skills-lock.json
 
 # ==============================================================================
-# Serialized Model Artifacts (Temporary)
+# Production Model Artifacts & Exceptions
 # ==============================================================================
-*.pkl
-models/
+# Allow production models required by inference pipeline
+!models/
+!models/heatwave_flag.pkl
+!models/heatwave_repredict_temp_model.pkl
+!models/heatwave_severity.pkl
+!models/heatwave_temp.pkl
+!models/preprocessing.pkl
+!models/district_climatology.json
+!models/district_metadata.json
+!models/pipeline_metadata.json
+
+# Ignore unused/baseline models
+models/baseline_logistic_regression.pkl
 
 # ==============================================================================
 # Python & Environment

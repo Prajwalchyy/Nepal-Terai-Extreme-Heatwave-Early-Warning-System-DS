@@ -1,0 +1,1556 @@
+{
+  "Banke": {
+    "1": {
+      "Clim_Max_Mean": 22.43,
+      "Clim_Max_Std": 2.39,
+      "Clim_Min_Mean": 10.19,
+      "Clim_Min_Std": 2.18
+    },
+    "2": {
+      "Clim_Max_Mean": 26.28,
+      "Clim_Max_Std": 2.62,
+      "Clim_Min_Mean": 12.85,
+      "Clim_Min_Std": 2.22
+    },
+    "3": {
+      "Clim_Max_Mean": 32.29,
+      "Clim_Max_Std": 2.63,
+      "Clim_Min_Mean": 17.35,
+      "Clim_Min_Std": 2.08
+    },
+    "4": {
+      "Clim_Max_Mean": 37.83,
+      "Clim_Max_Std": 2.7,
+      "Clim_Min_Mean": 22.52,
+      "Clim_Min_Std": 1.85
+    },
+    "5": {
+      "Clim_Max_Mean": 39.44,
+      "Clim_Max_Std": 2.82,
+      "Clim_Min_Mean": 25.81,
+      "Clim_Min_Std": 1.75
+    },
+    "6": {
+      "Clim_Max_Mean": 38.48,
+      "Clim_Max_Std": 3.62,
+      "Clim_Min_Mean": 27.53,
+      "Clim_Min_Std": 1.6
+    },
+    "7": {
+      "Clim_Max_Mean": 33.23,
+      "Clim_Max_Std": 2.75,
+      "Clim_Min_Mean": 26.19,
+      "Clim_Min_Std": 1.24
+    },
+    "8": {
+      "Clim_Max_Mean": 31.64,
+      "Clim_Max_Std": 1.85,
+      "Clim_Min_Mean": 25.28,
+      "Clim_Min_Std": 0.87
+    },
+    "9": {
+      "Clim_Max_Mean": 30.69,
+      "Clim_Max_Std": 1.6,
+      "Clim_Min_Mean": 23.94,
+      "Clim_Min_Std": 0.94
+    },
+    "10": {
+      "Clim_Max_Mean": 29.74,
+      "Clim_Max_Std": 2.02,
+      "Clim_Min_Mean": 20.56,
+      "Clim_Min_Std": 1.24
+    },
+    "11": {
+      "Clim_Max_Mean": 26.74,
+      "Clim_Max_Std": 1.84,
+      "Clim_Min_Mean": 16.16,
+      "Clim_Min_Std": 1.45
+    },
+    "12": {
+      "Clim_Max_Mean": 23.24,
+      "Clim_Max_Std": 1.96,
+      "Clim_Min_Mean": 11.9,
+      "Clim_Min_Std": 1.89
+    }
+  },
+  "Bara": {
+    "1": {
+      "Clim_Max_Mean": 23.5,
+      "Clim_Max_Std": 2.13,
+      "Clim_Min_Mean": 10.28,
+      "Clim_Min_Std": 2.25
+    },
+    "2": {
+      "Clim_Max_Mean": 27.49,
+      "Clim_Max_Std": 2.36,
+      "Clim_Min_Mean": 13.23,
+      "Clim_Min_Std": 2.11
+    },
+    "3": {
+      "Clim_Max_Mean": 33.33,
+      "Clim_Max_Std": 2.4,
+      "Clim_Min_Mean": 18.0,
+      "Clim_Min_Std": 1.99
+    },
+    "4": {
+      "Clim_Max_Mean": 38.17,
+      "Clim_Max_Std": 2.62,
+      "Clim_Min_Mean": 22.96,
+      "Clim_Min_Std": 1.65
+    },
+    "5": {
+      "Clim_Max_Mean": 38.49,
+      "Clim_Max_Std": 2.76,
+      "Clim_Min_Mean": 25.69,
+      "Clim_Min_Std": 1.55
+    },
+    "6": {
+      "Clim_Max_Mean": 37.31,
+      "Clim_Max_Std": 3.11,
+      "Clim_Min_Mean": 27.25,
+      "Clim_Min_Std": 1.38
+    },
+    "7": {
+      "Clim_Max_Mean": 33.14,
+      "Clim_Max_Std": 2.17,
+      "Clim_Min_Mean": 26.23,
+      "Clim_Min_Std": 0.89
+    },
+    "8": {
+      "Clim_Max_Mean": 31.94,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 25.56,
+      "Clim_Min_Std": 0.77
+    },
+    "9": {
+      "Clim_Max_Mean": 30.85,
+      "Clim_Max_Std": 1.62,
+      "Clim_Min_Mean": 24.35,
+      "Clim_Min_Std": 0.92
+    },
+    "10": {
+      "Clim_Max_Mean": 29.87,
+      "Clim_Max_Std": 1.85,
+      "Clim_Min_Mean": 20.8,
+      "Clim_Min_Std": 1.35
+    },
+    "11": {
+      "Clim_Max_Mean": 27.37,
+      "Clim_Max_Std": 1.72,
+      "Clim_Min_Mean": 16.05,
+      "Clim_Min_Std": 1.64
+    },
+    "12": {
+      "Clim_Max_Mean": 24.12,
+      "Clim_Max_Std": 1.88,
+      "Clim_Min_Mean": 11.8,
+      "Clim_Min_Std": 2.01
+    }
+  },
+  "Bardiya": {
+    "1": {
+      "Clim_Max_Mean": 22.85,
+      "Clim_Max_Std": 2.42,
+      "Clim_Min_Mean": 8.88,
+      "Clim_Min_Std": 2.57
+    },
+    "2": {
+      "Clim_Max_Mean": 26.95,
+      "Clim_Max_Std": 2.74,
+      "Clim_Min_Mean": 12.05,
+      "Clim_Min_Std": 2.58
+    },
+    "3": {
+      "Clim_Max_Mean": 33.25,
+      "Clim_Max_Std": 2.78,
+      "Clim_Min_Mean": 17.09,
+      "Clim_Min_Std": 2.52
+    },
+    "4": {
+      "Clim_Max_Mean": 39.09,
+      "Clim_Max_Std": 2.75,
+      "Clim_Min_Mean": 22.88,
+      "Clim_Min_Std": 2.02
+    },
+    "5": {
+      "Clim_Max_Mean": 40.91,
+      "Clim_Max_Std": 2.91,
+      "Clim_Min_Mean": 26.61,
+      "Clim_Min_Std": 1.86
+    },
+    "6": {
+      "Clim_Max_Mean": 40.0,
+      "Clim_Max_Std": 3.78,
+      "Clim_Min_Mean": 28.51,
+      "Clim_Min_Std": 1.78
+    },
+    "7": {
+      "Clim_Max_Mean": 34.32,
+      "Clim_Max_Std": 2.91,
+      "Clim_Min_Mean": 27.1,
+      "Clim_Min_Std": 1.33
+    },
+    "8": {
+      "Clim_Max_Mean": 32.61,
+      "Clim_Max_Std": 1.95,
+      "Clim_Min_Mean": 26.08,
+      "Clim_Min_Std": 0.89
+    },
+    "9": {
+      "Clim_Max_Mean": 31.68,
+      "Clim_Max_Std": 1.81,
+      "Clim_Min_Mean": 24.45,
+      "Clim_Min_Std": 1.09
+    },
+    "10": {
+      "Clim_Max_Mean": 30.64,
+      "Clim_Max_Std": 2.28,
+      "Clim_Min_Mean": 20.24,
+      "Clim_Min_Std": 1.62
+    },
+    "11": {
+      "Clim_Max_Mean": 27.32,
+      "Clim_Max_Std": 2.02,
+      "Clim_Min_Mean": 14.9,
+      "Clim_Min_Std": 2.03
+    },
+    "12": {
+      "Clim_Max_Mean": 23.58,
+      "Clim_Max_Std": 2.06,
+      "Clim_Min_Mean": 10.28,
+      "Clim_Min_Std": 2.38
+    }
+  },
+  "Chitwan": {
+    "1": {
+      "Clim_Max_Mean": 22.65,
+      "Clim_Max_Std": 2.27,
+      "Clim_Min_Mean": 10.37,
+      "Clim_Min_Std": 2.13
+    },
+    "2": {
+      "Clim_Max_Mean": 26.63,
+      "Clim_Max_Std": 2.47,
+      "Clim_Min_Mean": 13.06,
+      "Clim_Min_Std": 2.02
+    },
+    "3": {
+      "Clim_Max_Mean": 32.36,
+      "Clim_Max_Std": 2.51,
+      "Clim_Min_Mean": 17.56,
+      "Clim_Min_Std": 1.88
+    },
+    "4": {
+      "Clim_Max_Mean": 37.19,
+      "Clim_Max_Std": 2.69,
+      "Clim_Min_Mean": 22.14,
+      "Clim_Min_Std": 1.64
+    },
+    "5": {
+      "Clim_Max_Mean": 37.51,
+      "Clim_Max_Std": 2.8,
+      "Clim_Min_Mean": 24.49,
+      "Clim_Min_Std": 1.54
+    },
+    "6": {
+      "Clim_Max_Mean": 36.14,
+      "Clim_Max_Std": 3.16,
+      "Clim_Min_Mean": 26.05,
+      "Clim_Min_Std": 1.28
+    },
+    "7": {
+      "Clim_Max_Mean": 32.06,
+      "Clim_Max_Std": 2.25,
+      "Clim_Min_Mean": 25.42,
+      "Clim_Min_Std": 0.89
+    },
+    "8": {
+      "Clim_Max_Mean": 31.11,
+      "Clim_Max_Std": 1.71,
+      "Clim_Min_Mean": 24.93,
+      "Clim_Min_Std": 0.79
+    },
+    "9": {
+      "Clim_Max_Mean": 30.09,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 23.77,
+      "Clim_Min_Std": 0.9
+    },
+    "10": {
+      "Clim_Max_Mean": 28.86,
+      "Clim_Max_Std": 1.96,
+      "Clim_Min_Mean": 20.32,
+      "Clim_Min_Std": 1.24
+    },
+    "11": {
+      "Clim_Max_Mean": 26.16,
+      "Clim_Max_Std": 1.92,
+      "Clim_Min_Mean": 15.82,
+      "Clim_Min_Std": 1.48
+    },
+    "12": {
+      "Clim_Max_Mean": 23.14,
+      "Clim_Max_Std": 2.06,
+      "Clim_Min_Mean": 11.78,
+      "Clim_Min_Std": 1.94
+    }
+  },
+  "Dang": {
+    "1": {
+      "Clim_Max_Mean": 20.1,
+      "Clim_Max_Std": 2.28,
+      "Clim_Min_Mean": 8.65,
+      "Clim_Min_Std": 1.92
+    },
+    "2": {
+      "Clim_Max_Mean": 23.22,
+      "Clim_Max_Std": 2.48,
+      "Clim_Min_Mean": 10.72,
+      "Clim_Min_Std": 2.0
+    },
+    "3": {
+      "Clim_Max_Mean": 28.68,
+      "Clim_Max_Std": 2.47,
+      "Clim_Min_Mean": 14.75,
+      "Clim_Min_Std": 1.91
+    },
+    "4": {
+      "Clim_Max_Mean": 33.84,
+      "Clim_Max_Std": 2.64,
+      "Clim_Min_Mean": 19.41,
+      "Clim_Min_Std": 1.77
+    },
+    "5": {
+      "Clim_Max_Mean": 35.34,
+      "Clim_Max_Std": 2.73,
+      "Clim_Min_Mean": 22.42,
+      "Clim_Min_Std": 1.61
+    },
+    "6": {
+      "Clim_Max_Mean": 34.55,
+      "Clim_Max_Std": 3.32,
+      "Clim_Min_Mean": 24.32,
+      "Clim_Min_Std": 1.46
+    },
+    "7": {
+      "Clim_Max_Mean": 29.93,
+      "Clim_Max_Std": 2.4,
+      "Clim_Min_Mean": 23.33,
+      "Clim_Min_Std": 1.03
+    },
+    "8": {
+      "Clim_Max_Mean": 28.64,
+      "Clim_Max_Std": 1.64,
+      "Clim_Min_Mean": 22.65,
+      "Clim_Min_Std": 0.77
+    },
+    "9": {
+      "Clim_Max_Mean": 27.74,
+      "Clim_Max_Std": 1.41,
+      "Clim_Min_Mean": 21.42,
+      "Clim_Min_Std": 0.9
+    },
+    "10": {
+      "Clim_Max_Mean": 26.62,
+      "Clim_Max_Std": 1.84,
+      "Clim_Min_Mean": 18.11,
+      "Clim_Min_Std": 1.19
+    },
+    "11": {
+      "Clim_Max_Mean": 23.92,
+      "Clim_Max_Std": 1.58,
+      "Clim_Min_Mean": 14.04,
+      "Clim_Min_Std": 1.3
+    },
+    "12": {
+      "Clim_Max_Mean": 21.04,
+      "Clim_Max_Std": 1.76,
+      "Clim_Min_Mean": 10.37,
+      "Clim_Min_Std": 1.58
+    }
+  },
+  "Dhanusha": {
+    "1": {
+      "Clim_Max_Mean": 24.06,
+      "Clim_Max_Std": 2.04,
+      "Clim_Min_Mean": 9.7,
+      "Clim_Min_Std": 2.5
+    },
+    "2": {
+      "Clim_Max_Mean": 28.37,
+      "Clim_Max_Std": 2.4,
+      "Clim_Min_Mean": 12.76,
+      "Clim_Min_Std": 2.32
+    },
+    "3": {
+      "Clim_Max_Mean": 34.52,
+      "Clim_Max_Std": 2.41,
+      "Clim_Min_Mean": 17.95,
+      "Clim_Min_Std": 2.2
+    },
+    "4": {
+      "Clim_Max_Mean": 39.24,
+      "Clim_Max_Std": 2.69,
+      "Clim_Min_Mean": 23.32,
+      "Clim_Min_Std": 1.76
+    },
+    "5": {
+      "Clim_Max_Mean": 39.44,
+      "Clim_Max_Std": 2.89,
+      "Clim_Min_Mean": 26.47,
+      "Clim_Min_Std": 1.61
+    },
+    "6": {
+      "Clim_Max_Mean": 38.22,
+      "Clim_Max_Std": 3.2,
+      "Clim_Min_Mean": 28.13,
+      "Clim_Min_Std": 1.45
+    },
+    "7": {
+      "Clim_Max_Mean": 33.83,
+      "Clim_Max_Std": 2.23,
+      "Clim_Min_Mean": 26.86,
+      "Clim_Min_Std": 0.87
+    },
+    "8": {
+      "Clim_Max_Mean": 32.7,
+      "Clim_Max_Std": 1.61,
+      "Clim_Min_Mean": 26.18,
+      "Clim_Min_Std": 0.73
+    },
+    "9": {
+      "Clim_Max_Mean": 31.5,
+      "Clim_Max_Std": 1.73,
+      "Clim_Min_Mean": 24.9,
+      "Clim_Min_Std": 0.96
+    },
+    "10": {
+      "Clim_Max_Mean": 30.74,
+      "Clim_Max_Std": 1.82,
+      "Clim_Min_Mean": 21.12,
+      "Clim_Min_Std": 1.57
+    },
+    "11": {
+      "Clim_Max_Mean": 28.27,
+      "Clim_Max_Std": 1.69,
+      "Clim_Min_Mean": 15.77,
+      "Clim_Min_Std": 1.94
+    },
+    "12": {
+      "Clim_Max_Mean": 24.65,
+      "Clim_Max_Std": 1.83,
+      "Clim_Min_Mean": 11.25,
+      "Clim_Min_Std": 2.31
+    }
+  },
+  "Jhapa": {
+    "1": {
+      "Clim_Max_Mean": 23.15,
+      "Clim_Max_Std": 1.88,
+      "Clim_Min_Mean": 11.36,
+      "Clim_Min_Std": 1.92
+    },
+    "2": {
+      "Clim_Max_Mean": 26.92,
+      "Clim_Max_Std": 2.28,
+      "Clim_Min_Mean": 13.71,
+      "Clim_Min_Std": 2.02
+    },
+    "3": {
+      "Clim_Max_Mean": 32.25,
+      "Clim_Max_Std": 2.48,
+      "Clim_Min_Mean": 18.04,
+      "Clim_Min_Std": 1.84
+    },
+    "4": {
+      "Clim_Max_Mean": 35.26,
+      "Clim_Max_Std": 2.93,
+      "Clim_Min_Mean": 21.74,
+      "Clim_Min_Std": 1.56
+    },
+    "5": {
+      "Clim_Max_Mean": 34.58,
+      "Clim_Max_Std": 2.85,
+      "Clim_Min_Mean": 23.93,
+      "Clim_Min_Std": 1.31
+    },
+    "6": {
+      "Clim_Max_Mean": 33.07,
+      "Clim_Max_Std": 2.17,
+      "Clim_Min_Mean": 25.39,
+      "Clim_Min_Std": 0.85
+    },
+    "7": {
+      "Clim_Max_Mean": 30.57,
+      "Clim_Max_Std": 1.34,
+      "Clim_Min_Mean": 25.26,
+      "Clim_Min_Std": 0.64
+    },
+    "8": {
+      "Clim_Max_Mean": 30.32,
+      "Clim_Max_Std": 1.2,
+      "Clim_Min_Mean": 25.0,
+      "Clim_Min_Std": 0.71
+    },
+    "9": {
+      "Clim_Max_Mean": 29.47,
+      "Clim_Max_Std": 1.42,
+      "Clim_Min_Mean": 24.04,
+      "Clim_Min_Std": 0.91
+    },
+    "10": {
+      "Clim_Max_Mean": 28.23,
+      "Clim_Max_Std": 1.45,
+      "Clim_Min_Mean": 21.06,
+      "Clim_Min_Std": 1.25
+    },
+    "11": {
+      "Clim_Max_Mean": 25.96,
+      "Clim_Max_Std": 1.46,
+      "Clim_Min_Mean": 16.84,
+      "Clim_Min_Std": 1.37
+    },
+    "12": {
+      "Clim_Max_Mean": 23.5,
+      "Clim_Max_Std": 1.67,
+      "Clim_Min_Mean": 13.0,
+      "Clim_Min_Std": 1.81
+    }
+  },
+  "Kailali": {
+    "1": {
+      "Clim_Max_Mean": 22.72,
+      "Clim_Max_Std": 2.46,
+      "Clim_Min_Mean": 9.84,
+      "Clim_Min_Std": 2.16
+    },
+    "2": {
+      "Clim_Max_Mean": 26.55,
+      "Clim_Max_Std": 2.9,
+      "Clim_Min_Mean": 12.48,
+      "Clim_Min_Std": 2.22
+    },
+    "3": {
+      "Clim_Max_Mean": 32.71,
+      "Clim_Max_Std": 2.95,
+      "Clim_Min_Mean": 17.03,
+      "Clim_Min_Std": 2.22
+    },
+    "4": {
+      "Clim_Max_Mean": 38.58,
+      "Clim_Max_Std": 2.91,
+      "Clim_Min_Mean": 22.43,
+      "Clim_Min_Std": 1.97
+    },
+    "5": {
+      "Clim_Max_Mean": 40.55,
+      "Clim_Max_Std": 3.18,
+      "Clim_Min_Mean": 25.98,
+      "Clim_Min_Std": 1.9
+    },
+    "6": {
+      "Clim_Max_Mean": 39.85,
+      "Clim_Max_Std": 3.94,
+      "Clim_Min_Mean": 27.99,
+      "Clim_Min_Std": 1.73
+    },
+    "7": {
+      "Clim_Max_Mean": 33.87,
+      "Clim_Max_Std": 3.01,
+      "Clim_Min_Mean": 26.73,
+      "Clim_Min_Std": 1.33
+    },
+    "8": {
+      "Clim_Max_Mean": 32.09,
+      "Clim_Max_Std": 1.75,
+      "Clim_Min_Mean": 25.78,
+      "Clim_Min_Std": 0.84
+    },
+    "9": {
+      "Clim_Max_Mean": 31.38,
+      "Clim_Max_Std": 1.75,
+      "Clim_Min_Mean": 24.23,
+      "Clim_Min_Std": 1.0
+    },
+    "10": {
+      "Clim_Max_Mean": 30.46,
+      "Clim_Max_Std": 2.23,
+      "Clim_Min_Mean": 20.26,
+      "Clim_Min_Std": 1.38
+    },
+    "11": {
+      "Clim_Max_Mean": 27.21,
+      "Clim_Max_Std": 2.05,
+      "Clim_Min_Mean": 15.58,
+      "Clim_Min_Std": 1.57
+    },
+    "12": {
+      "Clim_Max_Mean": 23.63,
+      "Clim_Max_Std": 2.16,
+      "Clim_Min_Mean": 11.39,
+      "Clim_Min_Std": 1.93
+    }
+  },
+  "Kanchanpur": {
+    "1": {
+      "Clim_Max_Mean": 21.82,
+      "Clim_Max_Std": 2.55,
+      "Clim_Min_Mean": 9.19,
+      "Clim_Min_Std": 1.93
+    },
+    "2": {
+      "Clim_Max_Mean": 25.09,
+      "Clim_Max_Std": 2.93,
+      "Clim_Min_Mean": 11.42,
+      "Clim_Min_Std": 2.13
+    },
+    "3": {
+      "Clim_Max_Mean": 30.8,
+      "Clim_Max_Std": 2.93,
+      "Clim_Min_Mean": 15.79,
+      "Clim_Min_Std": 2.07
+    },
+    "4": {
+      "Clim_Max_Mean": 36.5,
+      "Clim_Max_Std": 2.92,
+      "Clim_Min_Mean": 21.11,
+      "Clim_Min_Std": 1.98
+    },
+    "5": {
+      "Clim_Max_Mean": 38.66,
+      "Clim_Max_Std": 3.17,
+      "Clim_Min_Mean": 24.56,
+      "Clim_Min_Std": 1.9
+    },
+    "6": {
+      "Clim_Max_Mean": 38.15,
+      "Clim_Max_Std": 3.75,
+      "Clim_Min_Mean": 26.55,
+      "Clim_Min_Std": 1.73
+    },
+    "7": {
+      "Clim_Max_Mean": 32.55,
+      "Clim_Max_Std": 2.83,
+      "Clim_Min_Mean": 25.48,
+      "Clim_Min_Std": 1.22
+    },
+    "8": {
+      "Clim_Max_Mean": 30.7,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 24.57,
+      "Clim_Min_Std": 0.78
+    },
+    "9": {
+      "Clim_Max_Mean": 30.03,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 22.93,
+      "Clim_Min_Std": 1.0
+    },
+    "10": {
+      "Clim_Max_Mean": 29.09,
+      "Clim_Max_Std": 1.99,
+      "Clim_Min_Mean": 18.63,
+      "Clim_Min_Std": 1.42
+    },
+    "11": {
+      "Clim_Max_Mean": 26.12,
+      "Clim_Max_Std": 1.83,
+      "Clim_Min_Mean": 14.24,
+      "Clim_Min_Std": 1.53
+    },
+    "12": {
+      "Clim_Max_Mean": 22.97,
+      "Clim_Max_Std": 2.13,
+      "Clim_Min_Mean": 10.52,
+      "Clim_Min_Std": 1.62
+    }
+  },
+  "Kapilvastu": {
+    "1": {
+      "Clim_Max_Mean": 23.19,
+      "Clim_Max_Std": 2.27,
+      "Clim_Min_Mean": 10.34,
+      "Clim_Min_Std": 2.2
+    },
+    "2": {
+      "Clim_Max_Mean": 27.31,
+      "Clim_Max_Std": 2.53,
+      "Clim_Min_Mean": 13.13,
+      "Clim_Min_Std": 2.07
+    },
+    "3": {
+      "Clim_Max_Mean": 33.43,
+      "Clim_Max_Std": 2.59,
+      "Clim_Min_Mean": 17.92,
+      "Clim_Min_Std": 2.05
+    },
+    "4": {
+      "Clim_Max_Mean": 38.58,
+      "Clim_Max_Std": 2.68,
+      "Clim_Min_Mean": 23.15,
+      "Clim_Min_Std": 1.74
+    },
+    "5": {
+      "Clim_Max_Mean": 39.48,
+      "Clim_Max_Std": 2.86,
+      "Clim_Min_Mean": 25.86,
+      "Clim_Min_Std": 1.65
+    },
+    "6": {
+      "Clim_Max_Mean": 38.33,
+      "Clim_Max_Std": 3.54,
+      "Clim_Min_Mean": 27.58,
+      "Clim_Min_Std": 1.55
+    },
+    "7": {
+      "Clim_Max_Mean": 33.26,
+      "Clim_Max_Std": 2.63,
+      "Clim_Min_Mean": 26.33,
+      "Clim_Min_Std": 1.09
+    },
+    "8": {
+      "Clim_Max_Mean": 32.07,
+      "Clim_Max_Std": 1.95,
+      "Clim_Min_Mean": 25.66,
+      "Clim_Min_Std": 0.88
+    },
+    "9": {
+      "Clim_Max_Mean": 31.11,
+      "Clim_Max_Std": 1.78,
+      "Clim_Min_Mean": 24.32,
+      "Clim_Min_Std": 0.98
+    },
+    "10": {
+      "Clim_Max_Mean": 30.33,
+      "Clim_Max_Std": 2.19,
+      "Clim_Min_Mean": 20.61,
+      "Clim_Min_Std": 1.36
+    },
+    "11": {
+      "Clim_Max_Mean": 27.49,
+      "Clim_Max_Std": 1.85,
+      "Clim_Min_Mean": 15.9,
+      "Clim_Min_Std": 1.6
+    },
+    "12": {
+      "Clim_Max_Mean": 23.93,
+      "Clim_Max_Std": 2.0,
+      "Clim_Min_Mean": 11.78,
+      "Clim_Min_Std": 1.96
+    }
+  },
+  "Mahottari": {
+    "1": {
+      "Clim_Max_Mean": 24.06,
+      "Clim_Max_Std": 2.04,
+      "Clim_Min_Mean": 9.7,
+      "Clim_Min_Std": 2.5
+    },
+    "2": {
+      "Clim_Max_Mean": 28.37,
+      "Clim_Max_Std": 2.4,
+      "Clim_Min_Mean": 12.76,
+      "Clim_Min_Std": 2.32
+    },
+    "3": {
+      "Clim_Max_Mean": 34.52,
+      "Clim_Max_Std": 2.41,
+      "Clim_Min_Mean": 17.95,
+      "Clim_Min_Std": 2.2
+    },
+    "4": {
+      "Clim_Max_Mean": 39.24,
+      "Clim_Max_Std": 2.69,
+      "Clim_Min_Mean": 23.32,
+      "Clim_Min_Std": 1.76
+    },
+    "5": {
+      "Clim_Max_Mean": 39.44,
+      "Clim_Max_Std": 2.89,
+      "Clim_Min_Mean": 26.47,
+      "Clim_Min_Std": 1.61
+    },
+    "6": {
+      "Clim_Max_Mean": 38.22,
+      "Clim_Max_Std": 3.2,
+      "Clim_Min_Mean": 28.13,
+      "Clim_Min_Std": 1.45
+    },
+    "7": {
+      "Clim_Max_Mean": 33.83,
+      "Clim_Max_Std": 2.23,
+      "Clim_Min_Mean": 26.86,
+      "Clim_Min_Std": 0.87
+    },
+    "8": {
+      "Clim_Max_Mean": 32.7,
+      "Clim_Max_Std": 1.61,
+      "Clim_Min_Mean": 26.18,
+      "Clim_Min_Std": 0.73
+    },
+    "9": {
+      "Clim_Max_Mean": 31.5,
+      "Clim_Max_Std": 1.73,
+      "Clim_Min_Mean": 24.9,
+      "Clim_Min_Std": 0.96
+    },
+    "10": {
+      "Clim_Max_Mean": 30.74,
+      "Clim_Max_Std": 1.82,
+      "Clim_Min_Mean": 21.12,
+      "Clim_Min_Std": 1.57
+    },
+    "11": {
+      "Clim_Max_Mean": 28.27,
+      "Clim_Max_Std": 1.69,
+      "Clim_Min_Mean": 15.77,
+      "Clim_Min_Std": 1.94
+    },
+    "12": {
+      "Clim_Max_Mean": 24.65,
+      "Clim_Max_Std": 1.83,
+      "Clim_Min_Mean": 11.25,
+      "Clim_Min_Std": 2.31
+    }
+  },
+  "Morang": {
+    "1": {
+      "Clim_Max_Mean": 23.36,
+      "Clim_Max_Std": 1.9,
+      "Clim_Min_Mean": 10.88,
+      "Clim_Min_Std": 1.93
+    },
+    "2": {
+      "Clim_Max_Mean": 27.09,
+      "Clim_Max_Std": 2.29,
+      "Clim_Min_Mean": 13.43,
+      "Clim_Min_Std": 1.98
+    },
+    "3": {
+      "Clim_Max_Mean": 32.53,
+      "Clim_Max_Std": 2.39,
+      "Clim_Min_Mean": 18.0,
+      "Clim_Min_Std": 1.85
+    },
+    "4": {
+      "Clim_Max_Mean": 35.9,
+      "Clim_Max_Std": 2.81,
+      "Clim_Min_Mean": 22.02,
+      "Clim_Min_Std": 1.61
+    },
+    "5": {
+      "Clim_Max_Mean": 35.54,
+      "Clim_Max_Std": 2.71,
+      "Clim_Min_Mean": 24.2,
+      "Clim_Min_Std": 1.35
+    },
+    "6": {
+      "Clim_Max_Mean": 34.34,
+      "Clim_Max_Std": 2.39,
+      "Clim_Min_Mean": 25.63,
+      "Clim_Min_Std": 0.93
+    },
+    "7": {
+      "Clim_Max_Mean": 31.16,
+      "Clim_Max_Std": 1.65,
+      "Clim_Min_Mean": 25.23,
+      "Clim_Min_Std": 0.67
+    },
+    "8": {
+      "Clim_Max_Mean": 30.74,
+      "Clim_Max_Std": 1.35,
+      "Clim_Min_Mean": 24.89,
+      "Clim_Min_Std": 0.75
+    },
+    "9": {
+      "Clim_Max_Mean": 29.82,
+      "Clim_Max_Std": 1.54,
+      "Clim_Min_Mean": 23.86,
+      "Clim_Min_Std": 0.92
+    },
+    "10": {
+      "Clim_Max_Mean": 28.89,
+      "Clim_Max_Std": 1.62,
+      "Clim_Min_Mean": 20.78,
+      "Clim_Min_Std": 1.31
+    },
+    "11": {
+      "Clim_Max_Mean": 26.75,
+      "Clim_Max_Std": 1.57,
+      "Clim_Min_Mean": 16.44,
+      "Clim_Min_Std": 1.44
+    },
+    "12": {
+      "Clim_Max_Mean": 23.99,
+      "Clim_Max_Std": 1.7,
+      "Clim_Min_Mean": 12.52,
+      "Clim_Min_Std": 1.78
+    }
+  },
+  "Nawalpur": {
+    "1": {
+      "Clim_Max_Mean": 22.65,
+      "Clim_Max_Std": 2.27,
+      "Clim_Min_Mean": 10.37,
+      "Clim_Min_Std": 2.13
+    },
+    "2": {
+      "Clim_Max_Mean": 26.63,
+      "Clim_Max_Std": 2.47,
+      "Clim_Min_Mean": 13.06,
+      "Clim_Min_Std": 2.02
+    },
+    "3": {
+      "Clim_Max_Mean": 32.36,
+      "Clim_Max_Std": 2.51,
+      "Clim_Min_Mean": 17.56,
+      "Clim_Min_Std": 1.88
+    },
+    "4": {
+      "Clim_Max_Mean": 37.19,
+      "Clim_Max_Std": 2.69,
+      "Clim_Min_Mean": 22.14,
+      "Clim_Min_Std": 1.64
+    },
+    "5": {
+      "Clim_Max_Mean": 37.51,
+      "Clim_Max_Std": 2.8,
+      "Clim_Min_Mean": 24.49,
+      "Clim_Min_Std": 1.54
+    },
+    "6": {
+      "Clim_Max_Mean": 36.14,
+      "Clim_Max_Std": 3.16,
+      "Clim_Min_Mean": 26.05,
+      "Clim_Min_Std": 1.28
+    },
+    "7": {
+      "Clim_Max_Mean": 32.06,
+      "Clim_Max_Std": 2.25,
+      "Clim_Min_Mean": 25.42,
+      "Clim_Min_Std": 0.89
+    },
+    "8": {
+      "Clim_Max_Mean": 31.11,
+      "Clim_Max_Std": 1.71,
+      "Clim_Min_Mean": 24.93,
+      "Clim_Min_Std": 0.79
+    },
+    "9": {
+      "Clim_Max_Mean": 30.09,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 23.77,
+      "Clim_Min_Std": 0.9
+    },
+    "10": {
+      "Clim_Max_Mean": 28.86,
+      "Clim_Max_Std": 1.96,
+      "Clim_Min_Mean": 20.32,
+      "Clim_Min_Std": 1.24
+    },
+    "11": {
+      "Clim_Max_Mean": 26.16,
+      "Clim_Max_Std": 1.92,
+      "Clim_Min_Mean": 15.82,
+      "Clim_Min_Std": 1.48
+    },
+    "12": {
+      "Clim_Max_Mean": 23.14,
+      "Clim_Max_Std": 2.06,
+      "Clim_Min_Mean": 11.78,
+      "Clim_Min_Std": 1.94
+    }
+  },
+  "Parasi": {
+    "1": {
+      "Clim_Max_Mean": 22.85,
+      "Clim_Max_Std": 2.29,
+      "Clim_Min_Mean": 10.21,
+      "Clim_Min_Std": 2.19
+    },
+    "2": {
+      "Clim_Max_Mean": 26.93,
+      "Clim_Max_Std": 2.53,
+      "Clim_Min_Mean": 12.9,
+      "Clim_Min_Std": 1.99
+    },
+    "3": {
+      "Clim_Max_Mean": 32.92,
+      "Clim_Max_Std": 2.57,
+      "Clim_Min_Mean": 17.63,
+      "Clim_Min_Std": 1.9
+    },
+    "4": {
+      "Clim_Max_Mean": 37.92,
+      "Clim_Max_Std": 2.68,
+      "Clim_Min_Mean": 22.57,
+      "Clim_Min_Std": 1.65
+    },
+    "5": {
+      "Clim_Max_Mean": 38.49,
+      "Clim_Max_Std": 2.83,
+      "Clim_Min_Mean": 25.09,
+      "Clim_Min_Std": 1.58
+    },
+    "6": {
+      "Clim_Max_Mean": 37.23,
+      "Clim_Max_Std": 3.35,
+      "Clim_Min_Mean": 26.79,
+      "Clim_Min_Std": 1.4
+    },
+    "7": {
+      "Clim_Max_Mean": 32.64,
+      "Clim_Max_Std": 2.38,
+      "Clim_Min_Mean": 25.9,
+      "Clim_Min_Std": 0.98
+    },
+    "8": {
+      "Clim_Max_Mean": 31.64,
+      "Clim_Max_Std": 1.83,
+      "Clim_Min_Mean": 25.35,
+      "Clim_Min_Std": 0.85
+    },
+    "9": {
+      "Clim_Max_Mean": 30.62,
+      "Clim_Max_Std": 1.66,
+      "Clim_Min_Mean": 24.09,
+      "Clim_Min_Std": 0.94
+    },
+    "10": {
+      "Clim_Max_Mean": 29.53,
+      "Clim_Max_Std": 2.03,
+      "Clim_Min_Mean": 20.35,
+      "Clim_Min_Std": 1.34
+    },
+    "11": {
+      "Clim_Max_Mean": 26.76,
+      "Clim_Max_Std": 1.92,
+      "Clim_Min_Mean": 15.55,
+      "Clim_Min_Std": 1.62
+    },
+    "12": {
+      "Clim_Max_Mean": 23.49,
+      "Clim_Max_Std": 2.08,
+      "Clim_Min_Mean": 11.53,
+      "Clim_Min_Std": 1.99
+    }
+  },
+  "Parsa": {
+    "1": {
+      "Clim_Max_Mean": 23.5,
+      "Clim_Max_Std": 2.13,
+      "Clim_Min_Mean": 10.28,
+      "Clim_Min_Std": 2.25
+    },
+    "2": {
+      "Clim_Max_Mean": 27.49,
+      "Clim_Max_Std": 2.36,
+      "Clim_Min_Mean": 13.23,
+      "Clim_Min_Std": 2.11
+    },
+    "3": {
+      "Clim_Max_Mean": 33.33,
+      "Clim_Max_Std": 2.4,
+      "Clim_Min_Mean": 18.0,
+      "Clim_Min_Std": 1.99
+    },
+    "4": {
+      "Clim_Max_Mean": 38.17,
+      "Clim_Max_Std": 2.62,
+      "Clim_Min_Mean": 22.96,
+      "Clim_Min_Std": 1.65
+    },
+    "5": {
+      "Clim_Max_Mean": 38.49,
+      "Clim_Max_Std": 2.76,
+      "Clim_Min_Mean": 25.69,
+      "Clim_Min_Std": 1.55
+    },
+    "6": {
+      "Clim_Max_Mean": 37.31,
+      "Clim_Max_Std": 3.11,
+      "Clim_Min_Mean": 27.25,
+      "Clim_Min_Std": 1.38
+    },
+    "7": {
+      "Clim_Max_Mean": 33.14,
+      "Clim_Max_Std": 2.17,
+      "Clim_Min_Mean": 26.23,
+      "Clim_Min_Std": 0.89
+    },
+    "8": {
+      "Clim_Max_Mean": 31.94,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 25.56,
+      "Clim_Min_Std": 0.77
+    },
+    "9": {
+      "Clim_Max_Mean": 30.85,
+      "Clim_Max_Std": 1.62,
+      "Clim_Min_Mean": 24.35,
+      "Clim_Min_Std": 0.92
+    },
+    "10": {
+      "Clim_Max_Mean": 29.87,
+      "Clim_Max_Std": 1.85,
+      "Clim_Min_Mean": 20.8,
+      "Clim_Min_Std": 1.35
+    },
+    "11": {
+      "Clim_Max_Mean": 27.37,
+      "Clim_Max_Std": 1.72,
+      "Clim_Min_Mean": 16.05,
+      "Clim_Min_Std": 1.64
+    },
+    "12": {
+      "Clim_Max_Mean": 24.12,
+      "Clim_Max_Std": 1.88,
+      "Clim_Min_Mean": 11.8,
+      "Clim_Min_Std": 2.01
+    }
+  },
+  "Rautahat": {
+    "1": {
+      "Clim_Max_Mean": 23.5,
+      "Clim_Max_Std": 2.13,
+      "Clim_Min_Mean": 10.28,
+      "Clim_Min_Std": 2.25
+    },
+    "2": {
+      "Clim_Max_Mean": 27.49,
+      "Clim_Max_Std": 2.36,
+      "Clim_Min_Mean": 13.23,
+      "Clim_Min_Std": 2.11
+    },
+    "3": {
+      "Clim_Max_Mean": 33.33,
+      "Clim_Max_Std": 2.4,
+      "Clim_Min_Mean": 18.0,
+      "Clim_Min_Std": 1.99
+    },
+    "4": {
+      "Clim_Max_Mean": 38.17,
+      "Clim_Max_Std": 2.62,
+      "Clim_Min_Mean": 22.96,
+      "Clim_Min_Std": 1.65
+    },
+    "5": {
+      "Clim_Max_Mean": 38.49,
+      "Clim_Max_Std": 2.76,
+      "Clim_Min_Mean": 25.69,
+      "Clim_Min_Std": 1.55
+    },
+    "6": {
+      "Clim_Max_Mean": 37.31,
+      "Clim_Max_Std": 3.11,
+      "Clim_Min_Mean": 27.25,
+      "Clim_Min_Std": 1.38
+    },
+    "7": {
+      "Clim_Max_Mean": 33.14,
+      "Clim_Max_Std": 2.17,
+      "Clim_Min_Mean": 26.23,
+      "Clim_Min_Std": 0.89
+    },
+    "8": {
+      "Clim_Max_Mean": 31.94,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 25.56,
+      "Clim_Min_Std": 0.77
+    },
+    "9": {
+      "Clim_Max_Mean": 30.85,
+      "Clim_Max_Std": 1.62,
+      "Clim_Min_Mean": 24.35,
+      "Clim_Min_Std": 0.92
+    },
+    "10": {
+      "Clim_Max_Mean": 29.87,
+      "Clim_Max_Std": 1.85,
+      "Clim_Min_Mean": 20.8,
+      "Clim_Min_Std": 1.35
+    },
+    "11": {
+      "Clim_Max_Mean": 27.37,
+      "Clim_Max_Std": 1.72,
+      "Clim_Min_Mean": 16.05,
+      "Clim_Min_Std": 1.64
+    },
+    "12": {
+      "Clim_Max_Mean": 24.12,
+      "Clim_Max_Std": 1.88,
+      "Clim_Min_Mean": 11.8,
+      "Clim_Min_Std": 2.01
+    }
+  },
+  "Rupandehi": {
+    "1": {
+      "Clim_Max_Mean": 22.85,
+      "Clim_Max_Std": 2.29,
+      "Clim_Min_Mean": 10.21,
+      "Clim_Min_Std": 2.19
+    },
+    "2": {
+      "Clim_Max_Mean": 26.93,
+      "Clim_Max_Std": 2.53,
+      "Clim_Min_Mean": 12.9,
+      "Clim_Min_Std": 1.99
+    },
+    "3": {
+      "Clim_Max_Mean": 32.92,
+      "Clim_Max_Std": 2.57,
+      "Clim_Min_Mean": 17.63,
+      "Clim_Min_Std": 1.9
+    },
+    "4": {
+      "Clim_Max_Mean": 37.92,
+      "Clim_Max_Std": 2.68,
+      "Clim_Min_Mean": 22.57,
+      "Clim_Min_Std": 1.65
+    },
+    "5": {
+      "Clim_Max_Mean": 38.49,
+      "Clim_Max_Std": 2.83,
+      "Clim_Min_Mean": 25.09,
+      "Clim_Min_Std": 1.58
+    },
+    "6": {
+      "Clim_Max_Mean": 37.23,
+      "Clim_Max_Std": 3.35,
+      "Clim_Min_Mean": 26.79,
+      "Clim_Min_Std": 1.4
+    },
+    "7": {
+      "Clim_Max_Mean": 32.64,
+      "Clim_Max_Std": 2.38,
+      "Clim_Min_Mean": 25.9,
+      "Clim_Min_Std": 0.98
+    },
+    "8": {
+      "Clim_Max_Mean": 31.64,
+      "Clim_Max_Std": 1.83,
+      "Clim_Min_Mean": 25.35,
+      "Clim_Min_Std": 0.85
+    },
+    "9": {
+      "Clim_Max_Mean": 30.62,
+      "Clim_Max_Std": 1.66,
+      "Clim_Min_Mean": 24.09,
+      "Clim_Min_Std": 0.94
+    },
+    "10": {
+      "Clim_Max_Mean": 29.53,
+      "Clim_Max_Std": 2.03,
+      "Clim_Min_Mean": 20.35,
+      "Clim_Min_Std": 1.34
+    },
+    "11": {
+      "Clim_Max_Mean": 26.76,
+      "Clim_Max_Std": 1.92,
+      "Clim_Min_Mean": 15.55,
+      "Clim_Min_Std": 1.62
+    },
+    "12": {
+      "Clim_Max_Mean": 23.49,
+      "Clim_Max_Std": 2.08,
+      "Clim_Min_Mean": 11.53,
+      "Clim_Min_Std": 1.99
+    }
+  },
+  "Saptari": {
+    "1": {
+      "Clim_Max_Mean": 23.38,
+      "Clim_Max_Std": 1.94,
+      "Clim_Min_Mean": 10.69,
+      "Clim_Min_Std": 2.15
+    },
+    "2": {
+      "Clim_Max_Mean": 27.34,
+      "Clim_Max_Std": 2.26,
+      "Clim_Min_Mean": 13.66,
+      "Clim_Min_Std": 2.04
+    },
+    "3": {
+      "Clim_Max_Mean": 33.03,
+      "Clim_Max_Std": 2.33,
+      "Clim_Min_Mean": 18.5,
+      "Clim_Min_Std": 1.93
+    },
+    "4": {
+      "Clim_Max_Mean": 36.9,
+      "Clim_Max_Std": 2.7,
+      "Clim_Min_Mean": 22.85,
+      "Clim_Min_Std": 1.61
+    },
+    "5": {
+      "Clim_Max_Mean": 36.87,
+      "Clim_Max_Std": 2.79,
+      "Clim_Min_Mean": 25.26,
+      "Clim_Min_Std": 1.47
+    },
+    "6": {
+      "Clim_Max_Mean": 35.74,
+      "Clim_Max_Std": 2.64,
+      "Clim_Min_Mean": 26.61,
+      "Clim_Min_Std": 1.05
+    },
+    "7": {
+      "Clim_Max_Mean": 32.2,
+      "Clim_Max_Std": 1.94,
+      "Clim_Min_Mean": 25.94,
+      "Clim_Min_Std": 0.73
+    },
+    "8": {
+      "Clim_Max_Mean": 31.59,
+      "Clim_Max_Std": 1.52,
+      "Clim_Min_Mean": 25.5,
+      "Clim_Min_Std": 0.73
+    },
+    "9": {
+      "Clim_Max_Mean": 30.56,
+      "Clim_Max_Std": 1.6,
+      "Clim_Min_Mean": 24.38,
+      "Clim_Min_Std": 0.89
+    },
+    "10": {
+      "Clim_Max_Mean": 29.56,
+      "Clim_Max_Std": 1.76,
+      "Clim_Min_Mean": 21.18,
+      "Clim_Min_Std": 1.39
+    },
+    "11": {
+      "Clim_Max_Mean": 27.13,
+      "Clim_Max_Std": 1.73,
+      "Clim_Min_Mean": 16.47,
+      "Clim_Min_Std": 1.55
+    },
+    "12": {
+      "Clim_Max_Mean": 23.99,
+      "Clim_Max_Std": 1.84,
+      "Clim_Min_Mean": 12.18,
+      "Clim_Min_Std": 2.01
+    }
+  },
+  "Sarlahi": {
+    "1": {
+      "Clim_Max_Mean": 23.14,
+      "Clim_Max_Std": 2.04,
+      "Clim_Min_Mean": 10.48,
+      "Clim_Min_Std": 2.08
+    },
+    "2": {
+      "Clim_Max_Mean": 26.8,
+      "Clim_Max_Std": 2.35,
+      "Clim_Min_Mean": 13.14,
+      "Clim_Min_Std": 1.97
+    },
+    "3": {
+      "Clim_Max_Mean": 32.26,
+      "Clim_Max_Std": 2.38,
+      "Clim_Min_Mean": 17.81,
+      "Clim_Min_Std": 1.85
+    },
+    "4": {
+      "Clim_Max_Mean": 36.66,
+      "Clim_Max_Std": 2.65,
+      "Clim_Min_Mean": 22.38,
+      "Clim_Min_Std": 1.58
+    },
+    "5": {
+      "Clim_Max_Mean": 36.92,
+      "Clim_Max_Std": 2.73,
+      "Clim_Min_Mean": 24.85,
+      "Clim_Min_Std": 1.48
+    },
+    "6": {
+      "Clim_Max_Mean": 35.93,
+      "Clim_Max_Std": 2.83,
+      "Clim_Min_Mean": 26.35,
+      "Clim_Min_Std": 1.25
+    },
+    "7": {
+      "Clim_Max_Mean": 32.21,
+      "Clim_Max_Std": 2.05,
+      "Clim_Min_Mean": 25.46,
+      "Clim_Min_Std": 0.85
+    },
+    "8": {
+      "Clim_Max_Mean": 31.16,
+      "Clim_Max_Std": 1.52,
+      "Clim_Min_Mean": 24.86,
+      "Clim_Min_Std": 0.74
+    },
+    "9": {
+      "Clim_Max_Mean": 30.09,
+      "Clim_Max_Std": 1.59,
+      "Clim_Min_Mean": 23.72,
+      "Clim_Min_Std": 0.9
+    },
+    "10": {
+      "Clim_Max_Mean": 29.13,
+      "Clim_Max_Std": 1.77,
+      "Clim_Min_Mean": 20.44,
+      "Clim_Min_Std": 1.32
+    },
+    "11": {
+      "Clim_Max_Mean": 26.81,
+      "Clim_Max_Std": 1.54,
+      "Clim_Min_Mean": 15.91,
+      "Clim_Min_Std": 1.46
+    },
+    "12": {
+      "Clim_Max_Mean": 23.79,
+      "Clim_Max_Std": 1.72,
+      "Clim_Min_Mean": 11.93,
+      "Clim_Min_Std": 1.75
+    }
+  },
+  "Siraha": {
+    "1": {
+      "Clim_Max_Mean": 23.91,
+      "Clim_Max_Std": 1.96,
+      "Clim_Min_Mean": 10.42,
+      "Clim_Min_Std": 2.29
+    },
+    "2": {
+      "Clim_Max_Mean": 28.0,
+      "Clim_Max_Std": 2.3,
+      "Clim_Min_Mean": 13.37,
+      "Clim_Min_Std": 2.16
+    },
+    "3": {
+      "Clim_Max_Mean": 33.92,
+      "Clim_Max_Std": 2.34,
+      "Clim_Min_Mean": 18.31,
+      "Clim_Min_Std": 2.02
+    },
+    "4": {
+      "Clim_Max_Mean": 38.23,
+      "Clim_Max_Std": 2.72,
+      "Clim_Min_Mean": 23.12,
+      "Clim_Min_Std": 1.65
+    },
+    "5": {
+      "Clim_Max_Mean": 38.39,
+      "Clim_Max_Std": 2.81,
+      "Clim_Min_Mean": 25.92,
+      "Clim_Min_Std": 1.53
+    },
+    "6": {
+      "Clim_Max_Mean": 37.33,
+      "Clim_Max_Std": 2.86,
+      "Clim_Min_Mean": 27.42,
+      "Clim_Min_Std": 1.21
+    },
+    "7": {
+      "Clim_Max_Mean": 33.28,
+      "Clim_Max_Std": 2.15,
+      "Clim_Min_Mean": 26.45,
+      "Clim_Min_Std": 0.81
+    },
+    "8": {
+      "Clim_Max_Mean": 32.41,
+      "Clim_Max_Std": 1.64,
+      "Clim_Min_Mean": 25.88,
+      "Clim_Min_Std": 0.74
+    },
+    "9": {
+      "Clim_Max_Mean": 31.24,
+      "Clim_Max_Std": 1.71,
+      "Clim_Min_Mean": 24.68,
+      "Clim_Min_Std": 0.93
+    },
+    "10": {
+      "Clim_Max_Mean": 30.42,
+      "Clim_Max_Std": 1.8,
+      "Clim_Min_Mean": 21.27,
+      "Clim_Min_Std": 1.5
+    },
+    "11": {
+      "Clim_Max_Mean": 28.03,
+      "Clim_Max_Std": 1.66,
+      "Clim_Min_Mean": 16.3,
+      "Clim_Min_Std": 1.75
+    },
+    "12": {
+      "Clim_Max_Mean": 24.56,
+      "Clim_Max_Std": 1.77,
+      "Clim_Min_Mean": 11.96,
+      "Clim_Min_Std": 2.11
+    }
+  },
+  "Sunsari": {
+    "1": {
+      "Clim_Max_Mean": 23.38,
+      "Clim_Max_Std": 1.94,
+      "Clim_Min_Mean": 10.69,
+      "Clim_Min_Std": 2.15
+    },
+    "2": {
+      "Clim_Max_Mean": 27.34,
+      "Clim_Max_Std": 2.26,
+      "Clim_Min_Mean": 13.66,
+      "Clim_Min_Std": 2.04
+    },
+    "3": {
+      "Clim_Max_Mean": 33.03,
+      "Clim_Max_Std": 2.33,
+      "Clim_Min_Mean": 18.5,
+      "Clim_Min_Std": 1.93
+    },
+    "4": {
+      "Clim_Max_Mean": 36.9,
+      "Clim_Max_Std": 2.7,
+      "Clim_Min_Mean": 22.85,
+      "Clim_Min_Std": 1.61
+    },
+    "5": {
+      "Clim_Max_Mean": 36.87,
+      "Clim_Max_Std": 2.79,
+      "Clim_Min_Mean": 25.26,
+      "Clim_Min_Std": 1.47
+    },
+    "6": {
+      "Clim_Max_Mean": 35.74,
+      "Clim_Max_Std": 2.64,
+      "Clim_Min_Mean": 26.61,
+      "Clim_Min_Std": 1.05
+    },
+    "7": {
+      "Clim_Max_Mean": 32.2,
+      "Clim_Max_Std": 1.94,
+      "Clim_Min_Mean": 25.94,
+      "Clim_Min_Std": 0.73
+    },
+    "8": {
+      "Clim_Max_Mean": 31.59,
+      "Clim_Max_Std": 1.52,
+      "Clim_Min_Mean": 25.5,
+      "Clim_Min_Std": 0.73
+    },
+    "9": {
+      "Clim_Max_Mean": 30.56,
+      "Clim_Max_Std": 1.6,
+      "Clim_Min_Mean": 24.38,
+      "Clim_Min_Std": 0.89
+    },
+    "10": {
+      "Clim_Max_Mean": 29.56,
+      "Clim_Max_Std": 1.76,
+      "Clim_Min_Mean": 21.18,
+      "Clim_Min_Std": 1.39
+    },
+    "11": {
+      "Clim_Max_Mean": 27.13,
+      "Clim_Max_Std": 1.73,
+      "Clim_Min_Mean": 16.47,
+      "Clim_Min_Std": 1.55
+    },
+    "12": {
+      "Clim_Max_Mean": 23.99,
+      "Clim_Max_Std": 1.84,
+      "Clim_Min_Mean": 12.18,
+      "Clim_Min_Std": 2.01
+    }
+  }
+}
