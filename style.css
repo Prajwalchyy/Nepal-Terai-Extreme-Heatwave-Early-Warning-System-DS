@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Global Typography & Palette */
+html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0f172a;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-variant-numeric: tabular-nums;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+}
+
+.block-container {
+    padding-top: 4.2rem !important;
+    padding-bottom: 2.5rem !important;
+    max-width: 1400px;
+}
+
+/* 1. Project Header */
+.ews-header {
+    background: #0f172a;
+    border: 1.5px solid #334155;
+    border-radius: 12px;
+    padding: 22px 28px;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.35);
+}
+.ews-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+    margin: 0;
+    color: #f8fafc;
+    line-height: 1.25;
+}
+.ews-clock-badge {
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 9px 16px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ews-live-time {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e2e8f0;
+    letter-spacing: 0.3px;
+}
+
+/* Control Deck Container */
+.control-deck {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.control-deck-title {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #475569;
+    margin-bottom: 12px;
+}
+
+/* 3 Main Result Cards */
+.result-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 22px 24px;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s ease-in-out;
+}
+.result-card-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+.status-display-large {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.threat-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14.5px;
+    margin-bottom: 12px;
+}
+.temp-hero-display {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: 4px 0 8px 0;
+}
+.temp-val-hero {
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+.temp-unit-hero {
+    font-size: 22px;
+    font-weight: 700;
+    color: #64748b;
+}
+.trend-indicator-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+/* Calibrated Probability Track */
+.prob-track {
+    background: #f1f5f9;
+    border-radius: 6px;
+    height: 10px;
+    width: 100%;
+    position: relative;
+    margin-top: 8px;
+    overflow: hidden;
+}
+.prob-fill {
+    height: 100%;
+    border-radius: 6px;
+}
+.threshold-marker {
+    position: absolute;
+    left: 30%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #0f172a;
+    z-index: 2;
+}
+
+/* Comparison Table / Deck */
+.comparison-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: 22px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.comparison-header {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.2px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 768px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.comp-pane {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+.comp-pane-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #475569;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 13.5px;
+}
+.comp-row:last-child {
+    border-bottom: none;
+}
+.comp-label {
+    color: #64748b;
+    font-weight: 500;
+}
+.comp-val {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Today's Weather Conditions Section */
+.conditions-container {
+    margin: 24px 0 16px 0;
+}
+.section-title-wrap {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: #0f172a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.weather-tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+@media (max-width: 1100px) {
+    .weather-tiles-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 650px) {
+    .weather-tiles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.weather-tile {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.tile-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+.tile-value-num {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 2px 0;
+}
+.tile-footnote {
+    font-size: 11.5px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* DRR Advisory Protocol Grid */
+.advisory-deck {
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    padding: 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.advisory-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 14px;
+}
+@media (max-width: 900px) {
+    .advisory-grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+.adv-cell {
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+.adv-cell-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #475569;
+    margin-bottom: 6px;
+}
+.adv-cell-body {
+    font-size: 13px;
+    color: #1e293b;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Geographic Context Ribbon */
+.geo-context-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-size: 13px;
+    color: #334155;
+}

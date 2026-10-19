@@ -1,19 +1,22 @@
 # ==============================================================================
-# Documentation, Coursework & Report Files (Ignored as requested)
+# Non-Code Files: Documentation, Research, Papers, Blueprints & Notes
 # ==============================================================================
+*.md
+*.json
+*.pdf
+*.docx
+*.pptx
+*.xlsx
+*.csv
+*.parquet
+Blueprint_Paper/
 softclg/
 docs/
 papers/
-*.pdf
-arxiv_results.json
-comparable_papers_analysis.md
-model_selection_and_literature_mapping.md
-download_papers_properly.py
-process_papers.py
 scratch/
 Drishyan_Dahal_17624516.pdf
-myproject.md
-README.md
+download_papers_properly.py
+process_papers.py
 
 # ==============================================================================
 # Agent, Licenses & Temporary Files
@@ -23,13 +26,13 @@ README.md
 .licenses/
 .license
 *.license
+skills-lock.json
 
 # ==============================================================================
 # Serialized Model Artifacts (Temporary)
 # ==============================================================================
 *.pkl
 models/
-
 
 # ==============================================================================
 # Python & Environment
