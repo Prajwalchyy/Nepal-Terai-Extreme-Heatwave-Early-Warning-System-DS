@@ -386,10 +386,58 @@ delta_sign = "+" if delta_t >= 0 else ""
 delta_str = f"{delta_sign}{delta_t:.1f}°C"
 
 # ------------------------------------------------------------------------------
-# 6. Three Main Prediction Results (Main Visual Focus)
+# 6. Today's Weather Conditions
 # ------------------------------------------------------------------------------
 st.markdown("---")
-st.html("<div class='section-title-wrap'>🎯 Tomorrow's Heatwave Forecast (24-Hour AI Prediction)</div>")
+feels_like_max = compute_feels_like(w["max_temp_c"], w["humidity_pct"], w["wind_speed_ms"])
+diurnal_diff = round(w["max_temp_c"] - w["min_temp_c"], 1)
+
+st.html(
+    f"""
+    <div class="conditions-container" style="margin-top: 10px;">
+        <div class="section-title-wrap">
+            <span>📊 Today's Weather Conditions • {district_name} ({today_str})</span>
+        </div>
+        <div class="weather-tiles-grid">
+            <div class="weather-tile">
+                <div class="tile-kicker">Max Temperature</div>
+                <div class="tile-value-num mono">{w['max_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
+                <div class="tile-footnote">Daytime peak thermometer</div>
+            </div>
+            <div class="weather-tile">
+                <div class="tile-kicker">Min Temperature</div>
+                <div class="tile-value-num mono">{w['min_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
+                <div class="tile-footnote">Diurnal Gap: <b class="mono">+{diurnal_diff}°C</b></div>
+            </div>
+            <div class="weather-tile">
+                <div class="tile-kicker">Feels-Like Temp</div>
+                <div class="tile-value-num mono" style="color:#ea580c;">{feels_like_max:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
+                <div class="tile-footnote">Steadman Apparent Index</div>
+            </div>
+            <div class="weather-tile">
+                <div class="tile-kicker">Relative Humidity</div>
+                <div class="tile-value-num mono">{w['humidity_pct']:.1f} <span style="font-size:15px; color:#64748b;">%</span></div>
+                <div class="tile-footnote">Peak afternoon moisture</div>
+            </div>
+            <div class="weather-tile">
+                <div class="tile-kicker">Wind Speed</div>
+                <div class="tile-value-num mono">{w['wind_speed_ms']:.2f} <span style="font-size:15px; color:#64748b;">m/s</span></div>
+                <div class="tile-footnote">Atmospheric circulation</div>
+            </div>
+            <div class="weather-tile">
+                <div class="tile-kicker">Precipitation</div>
+                <div class="tile-value-num mono">{w['precipitation_mm']:.1f} <span style="font-size:15px; color:#64748b;">mm</span></div>
+                <div class="tile-footnote">24-hour recorded rainfall</div>
+            </div>
+        </div>
+    </div>
+    """
+)
+
+# ------------------------------------------------------------------------------
+# 7. Tomorrow's Heatwave Forecast (24-Hour AI Prediction)
+# ------------------------------------------------------------------------------
+st.html("<div class='section-title-wrap' style='margin-top: 26px;'>🎯 Tomorrow's Heatwave Forecast (24-Hour AI Prediction)</div>")
 
 col_r1, col_r2, col_r3 = st.columns(3)
 
@@ -466,7 +514,7 @@ with col_r3:
     )
 
 # ------------------------------------------------------------------------------
-# 7. Today vs Tomorrow Comparison Section
+# 8. Today vs Tomorrow Comparison Section
 # ------------------------------------------------------------------------------
 today_status_badge = (
     f'<span style="background:{today_eval["bg"]}; color:{today_eval["text"]}; '
@@ -503,7 +551,7 @@ tomorrow_threat_badge = (
 
 st.html(
     f"""
-    <div class="comparison-container">
+    <div class="comparison-container" style="margin-top: 26px;">
         <div class="comparison-header">
             <div>⚖️ Today vs Tomorrow Meteorological Comparison • {district_name}</div>
         </div>
@@ -541,54 +589,6 @@ st.html(
                     <span class="comp-label">Max Temperature</span>
                     <span class="comp-val mono" style="font-size:16px; color:{tomorrow_threat['color']}; font-weight:800;">{pred_temp_tomorrow:.2f} °C <span style="font-size:12px; font-weight:600; color:{trend_color};">({delta_str})</span></span>
                 </div>
-            </div>
-        </div>
-    </div>
-    """
-)
-
-# ------------------------------------------------------------------------------
-# 8. Today's Weather Conditions
-# ------------------------------------------------------------------------------
-feels_like_max = compute_feels_like(w["max_temp_c"], w["humidity_pct"], w["wind_speed_ms"])
-diurnal_diff = round(w["max_temp_c"] - w["min_temp_c"], 1)
-
-st.html(
-    f"""
-    <div class="conditions-container">
-        <div class="section-title-wrap">
-            <span>📊 Today's Weather Conditions • {district_name} ({today_str})</span>
-        </div>
-        <div class="weather-tiles-grid">
-            <div class="weather-tile">
-                <div class="tile-kicker">Max Temperature</div>
-                <div class="tile-value-num mono">{w['max_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
-                <div class="tile-footnote">Daytime peak thermometer</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Min Temperature</div>
-                <div class="tile-value-num mono">{w['min_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
-                <div class="tile-footnote">Diurnal Gap: <b class="mono">+{diurnal_diff}°C</b></div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Feels-Like Temp</div>
-                <div class="tile-value-num mono" style="color:#ea580c;">{feels_like_max:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
-                <div class="tile-footnote">Steadman Apparent Index</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Relative Humidity</div>
-                <div class="tile-value-num mono">{w['humidity_pct']:.1f} <span style="font-size:15px; color:#64748b;">%</span></div>
-                <div class="tile-footnote">Peak afternoon moisture</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Wind Speed</div>
-                <div class="tile-value-num mono">{w['wind_speed_ms']:.2f} <span style="font-size:15px; color:#64748b;">m/s</span></div>
-                <div class="tile-footnote">Atmospheric circulation</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Precipitation</div>
-                <div class="tile-value-num mono">{w['precipitation_mm']:.1f} <span style="font-size:15px; color:#64748b;">mm</span></div>
-                <div class="tile-footnote">24-hour recorded rainfall</div>
             </div>
         </div>
     </div>
