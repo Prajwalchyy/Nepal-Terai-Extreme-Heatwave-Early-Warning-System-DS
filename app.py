@@ -11,11 +11,14 @@ Engine: Multi-Champion ML Pipeline (Random Forest + LightGBM + Ridge + Specialis
 
 import sys
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
-# Ensure UTF-8 output encoding across Windows shells
+# Ensure UTF-8 output encoding across Windows shells safely
 if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8")
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 import streamlit as st
 import numpy as np
@@ -27,6 +30,8 @@ if str(BASE_DIR) not in sys.path:
 
 from src.predict import (
     predict_heatwave,
+    fetch_live_weather,
+    DISTRICT_CLIMATOLOGY,
     VALID_DISTRICTS,
     DISTRICT_METADATA,
     HEATWAVE_ALERT_TEMP,
@@ -163,8 +168,44 @@ def get_threat_profile(tier_num: int) -> dict:
     }
     return profiles.get(tier_num, profiles[0])
 
+@st.cache_data(ttl=600, show_spinner=False)
+def fetch_today_api_weather(district: str) -> dict:
+    """
+    Fetches today's live atmospheric parameters from Open-Meteo API.
+    Cached for 10 minutes to maintain snappy dashboard responsiveness.
+    Falls back gracefully to 26-year district climatological normals if offline.
+    """
+    try:
+        data = fetch_live_weather(district)
+        return {
+            "max_temp_c": float(data["max_temp_c"]),
+            "min_temp_c": float(data["min_temp_c"]),
+            "humidity_pct": float(data["humidity_pct"]),
+            "wind_speed_ms": float(data["wind_speed_ms"]),
+            "precipitation_mm": float(data["precipitation_mm"]),
+            "date_str": str(data.get("date_str", datetime.now().strftime("%Y-%m-%d"))),
+            "is_live": True,
+            "source": "Open-Meteo Live API",
+        }
+    except Exception as e:
+        month_str = str(datetime.now().month)
+        clim = DISTRICT_CLIMATOLOGY.get(district, {}).get(month_str, {})
+        default_max = float(clim.get("Clim_Max_Mean", 43.0))
+        default_min = float(clim.get("Clim_Min_Mean", 28.0))
+        return {
+            "max_temp_c": round(default_max, 1),
+            "min_temp_c": round(default_min, 1),
+            "humidity_pct": 35.0,
+            "wind_speed_ms": 3.5,
+            "precipitation_mm": 0.0,
+            "date_str": datetime.now().strftime("%Y-%m-%d"),
+            "is_live": False,
+            "source": "Climatological Normals (Offline Fallback)",
+        }
+
+
 # Current time in Nepal Time (NPT: UTC+5:45)
-npt_time = datetime.utcnow() + timedelta(hours=5, minutes=45)
+npt_time = datetime.now(timezone.utc) + timedelta(hours=5, minutes=45)
 live_time_str = npt_time.strftime("%A, %d %B %Y • %H:%M:%S NPT")
 
 # ------------------------------------------------------------------------------
@@ -223,7 +264,250 @@ st.html(
 )
 
 # ------------------------------------------------------------------------------
-# 4. Two Prediction Modes (Clearly Distinguishable Tabs)
+# 4. Prediction Dashboard Renderer (Scoped per Mode)
+# ------------------------------------------------------------------------------
+def render_prediction_dashboard(result: dict, is_custom_mode: bool = False):
+    """Renders forecast results, today's weather inputs, and comparison cards for a mode."""
+    w = result["input_weather"]
+    district_name = result["district"]
+    d_info = DISTRICT_METADATA[district_name]
+
+    # Dates
+    obs_date = datetime.strptime(result["forecast_date"], "%Y-%m-%d").date()
+    tomorrow_date = obs_date + timedelta(days=1)
+    today_str = obs_date.strftime("%d %b %Y")
+    tomorrow_str = tomorrow_date.strftime("%d %b %Y")
+
+    # Today's deterministic ground-truth status
+    today_max = w["max_temp_c"]
+    today_eval = evaluate_today_observed_status(today_max)
+
+    # Tomorrow's AI Model predictions
+    is_alert_tomorrow = result["heatwave_alert"]
+    prob_tomorrow = result["alert_probability"]
+    tier_tomorrow = result["severity_tier"]
+    pred_temp_tomorrow = result["predicted_max_temp_c"]
+    tomorrow_threat = get_threat_profile(tier_tomorrow)
+
+    # Temperature shift
+    delta_t = round(pred_temp_tomorrow - today_max, 2)
+    delta_sign = "+" if delta_t >= 0 else ""
+    delta_str = f"{delta_sign}{delta_t:.1f}°C"
+
+    # Tomorrow's Heatwave Forecast (24-Hour AI Prediction)
+    st.markdown("---")
+    st.html("<div class='section-title-wrap' style='margin-top: 10px;'>🎯 Tomorrow's Heatwave Forecast (24-Hour AI Prediction)</div>")
+
+    col_r1, col_r2, col_r3 = st.columns(3)
+
+    # Heatwave Status
+    with col_r1:
+        if is_alert_tomorrow:
+            hw_status_text = "HOT"
+            hw_sub_label = "Heatwave Alert Active"
+            hw_color = "#dc2626"
+            hw_bg = "#fef2f2"
+            hw_border = "#fecaca"
+            hw_icon = "⚠️"
+        else:
+            hw_status_text = "NORMAL"
+            hw_sub_label = "No Heatwave Expected"
+            hw_color = "#059669"
+            hw_bg = "#ecfdf5"
+            hw_border = "#a7f3d0"
+            hw_icon = "✅"
+
+        st.html(
+            f"""
+            <div class="result-card" style="border-top: 5px solid {hw_color};">
+                <div class="result-card-kicker">Heatwave Status • Tomorrow ({tomorrow_str})</div>
+                <div class="status-display-large" style="color: {hw_color};">
+                    <span>{hw_icon}</span>
+                    <span>{hw_status_text}</span>
+                </div>
+                <div style="font-size:13.5px; font-weight:700; color:{hw_color}; margin-bottom:12px;">
+                    {hw_sub_label}
+                </div>
+                <div style="font-size:12.5px; font-weight:600; color:#475569;">
+                    Heatwave Probability: <b class="mono" style="color:{hw_color};">{prob_tomorrow * 100:.1f}%</b>
+                </div>
+            </div>
+            """
+        )
+
+    # Heatwave Threat Level
+    with col_r2:
+        st.html(
+            f"""
+            <div class="result-card" style="border-top: 5px solid {tomorrow_threat['color']};">
+                <div class="result-card-kicker">Heatwave Threat Level • Tomorrow ({tomorrow_str})</div>
+                <div style="margin-top: 14px;">
+                    <div class="threat-badge-pill" style="background:{tomorrow_threat['bg']}; color:{tomorrow_threat['text']}; border:1.5px solid {tomorrow_threat['border']}; margin-bottom:0;">
+                        <span>●</span> <span>{tomorrow_threat['label']}</span>
+                    </div>
+                </div>
+            </div>
+            """
+        )
+
+    # Predicted Temperature
+    with col_r3:
+        temp_color = tomorrow_threat['color']
+        trend_bg = "#fee2e2" if delta_t > 0.5 else ("#ecfdf5" if delta_t < -0.5 else "#f1f5f9")
+        trend_color = "#991b1b" if delta_t > 0.5 else ("#065f46" if delta_t < -0.5 else "#475569")
+
+        st.html(
+            f"""
+            <div class="result-card" style="border-top: 5px solid {temp_color};">
+                <div class="result-card-kicker">Predicted High Temperature • Tomorrow ({tomorrow_str})</div>
+                <div class="temp-hero-display">
+                    <span style="font-size:32px; margin-right:4px;">🌡️</span>
+                    <span class="temp-val-hero mono" style="color: {temp_color};">{pred_temp_tomorrow:.2f}</span>
+                    <span class="temp-unit-hero">°C</span>
+                </div>
+                <div class="trend-indicator-pill" style="background:{trend_bg}; color:{trend_color};">
+                    <span>24h Trend: <b>{delta_str}</b> vs today ({today_max:.1f}°C)</span>
+                </div>
+            </div>
+            """
+        )
+
+    # Today's Weather Conditions
+    feels_like_max = compute_feels_like(w["max_temp_c"], w["humidity_pct"], w["wind_speed_ms"])
+    diurnal_diff = round(w["max_temp_c"] - w["min_temp_c"], 1)
+
+    mode_tag = (
+        '<span style="background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:8px;">🧪 Custom Scenario</span>'
+        if is_custom_mode
+        else '<span style="background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:8px;">📡 Live Telemetry</span>'
+    )
+
+    st.html(
+        f"""
+        <div class="conditions-container" style="margin-top: 26px;">
+            <div class="section-title-wrap">
+                <span>📊 Today's Weather Conditions • {district_name} ({today_str})</span>
+                {mode_tag}
+            </div>
+            <div class="weather-tiles-grid">
+                <div class="weather-tile">
+                    <div class="tile-kicker">Max Temperature</div>
+                    <div class="tile-value-num mono">{w['max_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
+                    <div class="tile-footnote">Daytime peak thermometer</div>
+                </div>
+                <div class="weather-tile">
+                    <div class="tile-kicker">Min Temperature</div>
+                    <div class="tile-value-num mono">{w['min_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
+                    <div class="tile-footnote">Diurnal Gap: <b class="mono">+{diurnal_diff}°C</b></div>
+                </div>
+                <div class="weather-tile">
+                    <div class="tile-kicker">Feels-Like Temp</div>
+                    <div class="tile-value-num mono" style="color:#ea580c;">{feels_like_max:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
+                    <div class="tile-footnote">Steadman Apparent Index</div>
+                </div>
+                <div class="weather-tile">
+                    <div class="tile-kicker">Relative Humidity</div>
+                    <div class="tile-value-num mono">{w['humidity_pct']:.1f} <span style="font-size:15px; color:#64748b;">%</span></div>
+                    <div class="tile-footnote">Peak afternoon moisture</div>
+                </div>
+                <div class="weather-tile">
+                    <div class="tile-kicker">Wind Speed</div>
+                    <div class="tile-value-num mono">{w['wind_speed_ms']:.2f} <span style="font-size:15px; color:#64748b;">m/s</span></div>
+                    <div class="tile-footnote">Atmospheric circulation</div>
+                </div>
+                <div class="weather-tile">
+                    <div class="tile-kicker">Precipitation</div>
+                    <div class="tile-value-num mono">{w['precipitation_mm']:.1f} <span style="font-size:15px; color:#64748b;">mm</span></div>
+                    <div class="tile-footnote">24-hour recorded rainfall</div>
+                </div>
+            </div>
+        </div>
+        """
+    )
+
+    # Today vs Tomorrow Comparison Section
+    today_status_badge = (
+        f'<span style="background:{today_eval["bg"]}; color:{today_eval["text"]}; '
+        f'border:1px solid {today_eval["border"]}; padding:4px 10px; border-radius:999px; '
+        f'font-weight:800; font-size:12px;">'
+        f'{"⚠️ " + today_eval["status_short"] if today_eval["is_hot"] else "✅ " + today_eval["status_short"]}'
+        f'</span>'
+    )
+
+    tomorrow_status_badge = (
+        f'<span style="background:{"#fef2f2" if is_alert_tomorrow else "#ecfdf5"}; '
+        f'color:{"#991b1b" if is_alert_tomorrow else "#065f46"}; '
+        f'border:1px solid {"#fecaca" if is_alert_tomorrow else "#a7f3d0"}; '
+        f'padding:4px 10px; border-radius:999px; font-weight:800; font-size:12px;">'
+        f'{"⚠️ HOT" if is_alert_tomorrow else "✅ NORMAL"} ({prob_tomorrow * 100:.1f}%)'
+        f'</span>'
+    )
+
+    today_threat_badge = (
+        f'<span style="background:{today_eval["bg"]}; color:{today_eval["text"]}; '
+        f'border:1px solid {today_eval["border"]}; padding:4px 10px; border-radius:999px; '
+        f'font-weight:700; font-size:12px;">'
+        f'{today_eval["threat_label"]}'
+        f'</span>'
+    )
+
+    tomorrow_threat_badge = (
+        f'<span style="background:{tomorrow_threat["bg"]}; color:{tomorrow_threat["text"]}; '
+        f'border:1px solid {tomorrow_threat["border"]}; padding:4px 10px; border-radius:999px; '
+        f'font-weight:700; font-size:12px;">'
+        f'{tomorrow_threat["label"]}'
+        f'</span>'
+    )
+
+    st.html(
+        f"""
+        <div class="comparison-container" style="margin-top: 26px;">
+            <div class="comparison-header">
+                <div>⚖️ Today vs Tomorrow Meteorological Comparison • {district_name}</div>
+            </div>
+            <div class="comparison-grid">
+                <div class="comp-pane" style="border-left: 4px solid {today_eval['color']};">
+                    <div class="comp-pane-title">
+                        <span>📅 TODAY ({today_str})</span>
+                    </div>
+                    <div class="comp-row">
+                        <span class="comp-label">Heatwave Status</span>
+                        <span class="comp-val">{today_status_badge}</span>
+                    </div>
+                    <div class="comp-row">
+                        <span class="comp-label">Heatwave Threat Level</span>
+                        <span class="comp-val">{today_threat_badge}</span>
+                    </div>
+                    <div class="comp-row">
+                        <span class="comp-label">Max Temperature</span>
+                        <span class="comp-val mono" style="font-size:16px; color:{today_eval['color']}; font-weight:800;">{today_max:.1f} °C</span>
+                    </div>
+                </div>
+                <div class="comp-pane" style="border-left: 4px solid {tomorrow_threat['color']};">
+                    <div class="comp-pane-title">
+                        <span>🔮 TOMORROW PREDICTION ({tomorrow_str})</span>
+                    </div>
+                    <div class="comp-row">
+                        <span class="comp-label">Heatwave Status</span>
+                        <span class="comp-val">{tomorrow_status_badge}</span>
+                    </div>
+                    <div class="comp-row">
+                        <span class="comp-label">Heatwave Threat Level</span>
+                        <span class="comp-val">{tomorrow_threat_badge}</span>
+                    </div>
+                    <div class="comp-row">
+                        <span class="comp-label">Max Temperature</span>
+                        <span class="comp-val mono" style="font-size:16px; color:{tomorrow_threat['color']}; font-weight:800;">{pred_temp_tomorrow:.2f} °C <span style="font-size:12px; font-weight:600; color:{trend_color};">({delta_str})</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        """
+    )
+
+
+# ------------------------------------------------------------------------------
+# 5. Two Independent Prediction Modes (Separated State & Execution)
 # ------------------------------------------------------------------------------
 district_labels = {
     d: f"{d} ({DISTRICT_METADATA[d]['Regional_Hub']}, {DISTRICT_METADATA[d]['Province']})"
@@ -235,11 +519,11 @@ mode_tab1, mode_tab2 = st.tabs([
     "🧪 Mode 2: Custom Weather Input (Scenario Analysis)",
 ])
 
-# State initialization
-if "active_district" not in st.session_state:
-    st.session_state["active_district"] = "Banke"
-if "pred_mode" not in st.session_state:
-    st.session_state["pred_mode"] = "live"
+# Independent state initialization for both modes
+if "dist_mode1" not in st.session_state:
+    st.session_state["dist_mode1"] = "Banke"
+if "dist_mode2" not in st.session_state:
+    st.session_state["dist_mode2"] = "Banke"
 
 # --- MODE 1: District-Based Prediction ---
 with mode_tab1:
@@ -250,18 +534,18 @@ with mode_tab1:
             "Select District",
             options=VALID_DISTRICTS,
             format_func=lambda d: district_labels[d],
-            index=VALID_DISTRICTS.index(st.session_state["active_district"]) if st.session_state["active_district"] in VALID_DISTRICTS else 0,
+            index=VALID_DISTRICTS.index(st.session_state["dist_mode1"]) if st.session_state["dist_mode1"] in VALID_DISTRICTS else 0,
             key="dist_mode1",
             help="Pulls automated weather observations and 14-day history directly from satellite & station feeds.",
         )
     
     with col_d2:
-        d_meta = DISTRICT_METADATA[sel_dist_mode1]
+        d_meta1 = DISTRICT_METADATA[sel_dist_mode1]
         st.html(
             f"""
             <div style="padding-top:28px; font-size:12.5px; color:#475569; line-height:1.4;">
-                <b>Sub-Region:</b> {d_meta['Terai_Region']}<br>
-                <b>GPS:</b> <span class="mono">{d_meta['Latitude']}°N, {d_meta['Longitude']}°E</span>
+                <b>Sub-Region:</b> {d_meta1['Terai_Region']}<br>
+                <b>GPS:</b> <span class="mono">{d_meta1['Latitude']}°N, {d_meta1['Longitude']}°E</span>
             </div>
             """
         )
@@ -270,333 +554,145 @@ with mode_tab1:
         st.html("<div style='height: 28px;'></div>")
         btn_mode1 = st.button("🚀 Run Forecast", type="primary", use_container_width=True, key="btn_mode1")
 
+    # Mode 1 execution: only runs on explicit button press or initial load
+    if btn_mode1 or ("mode1_result" not in st.session_state):
+        with st.spinner(f"Ingesting atmospheric parameters and executing multi-champion models for {sel_dist_mode1}..."):
+            try:
+                res1 = predict_heatwave(
+                    district=sel_dist_mode1,
+                    date_str=datetime.now().strftime("%Y-%m-%d"),
+                    use_live_api=True,
+                )
+                st.session_state["mode1_result"] = res1
+                st.session_state["mode1_error"] = None
+            except Exception as e:
+                st.session_state["mode1_error"] = f"Forecast Generation Failed: {e}"
+
+    # Render Mode 1's isolated results and inputs
+    if st.session_state.get("mode1_error"):
+        st.error(st.session_state["mode1_error"])
+    elif st.session_state.get("mode1_result"):
+        render_prediction_dashboard(st.session_state["mode1_result"], is_custom_mode=False)
+
 # --- MODE 2: Custom Weather Input ---
 with mode_tab2:
-    st.html("<div style='font-size:13px; color:#475569; margin-bottom:12px;'>Enter custom atmospheric observations to test model predictions under extreme climate stress scenarios:</div>")
-    
     col_c1, col_c2 = st.columns([2, 1])
     with col_c1:
         sel_dist_mode2 = st.selectbox(
             "Target District",
             options=VALID_DISTRICTS,
             format_func=lambda d: district_labels[d],
-            index=VALID_DISTRICTS.index(st.session_state["active_district"]) if st.session_state["active_district"] in VALID_DISTRICTS else 0,
+            index=VALID_DISTRICTS.index(st.session_state["dist_mode2"]) if st.session_state["dist_mode2"] in VALID_DISTRICTS else 0,
             key="dist_mode2",
         )
+
+    # Automatically fetch initial inputs from the API on initial load, refresh, or district switch
+    if st.session_state.get("custom_inputs_loaded_for") != sel_dist_mode2:
+        live_today = fetch_today_api_weather(sel_dist_mode2)
+        st.session_state["cust_max_t"] = float(np.clip(round(live_today["max_temp_c"], 1), 15.0, 55.0))
+        # Ensure min < max
+        valid_min = min(round(live_today["min_temp_c"], 1), st.session_state["cust_max_t"] - 1.0)
+        st.session_state["cust_min_t"] = float(np.clip(valid_min, 5.0, 38.0))
+        st.session_state["cust_rh"] = float(np.clip(round(live_today["humidity_pct"], 1), 5.0, 100.0))
+        st.session_state["cust_wind"] = float(np.clip(round(live_today["wind_speed_ms"], 1), 0.0, 25.0))
+        st.session_state["cust_precip"] = float(np.clip(round(round(live_today["precipitation_mm"] * 2) / 2, 1), 0.0, 150.0))
+        try:
+            st.session_state["custom_date"] = datetime.strptime(live_today["date_str"], "%Y-%m-%d").date()
+        except Exception:
+            st.session_state["custom_date"] = datetime.now().date()
+            
+        st.session_state["custom_inputs_loaded_for"] = sel_dist_mode2
+
     with col_c2:
-        custom_date = st.date_input("Observation Date", value=datetime.now().date(), key="custom_date")
+        custom_date = st.date_input(
+            "Observation Date",
+            key="custom_date",
+        )
 
     col_w1, col_w2, col_w3 = st.columns(3)
     with col_w1:
-        custom_max_t = st.slider("Maximum Temp (°C)", min_value=20.0, max_value=55.0, value=43.5, step=0.1, key="cust_max_t")
+        custom_max_t = st.slider(
+            "Maximum Temp (°C)",
+            min_value=15.0,
+            max_value=55.0,
+            step=0.1,
+            key="cust_max_t",
+        )
     with col_w2:
-        custom_min_t = st.slider("Minimum Temp (°C)", min_value=10.0, max_value=38.0, value=28.0, step=0.1, key="cust_min_t")
+        custom_min_t = st.slider(
+            "Minimum Temp (°C)",
+            min_value=5.0,
+            max_value=38.0,
+            step=0.1,
+            key="cust_min_t",
+        )
     with col_w3:
-        custom_rh = st.slider("Humidity (%)", min_value=5.0, max_value=100.0, value=35.0, step=1.0, key="cust_rh")
+        custom_rh = st.slider(
+            "Humidity (%)",
+            min_value=5.0,
+            max_value=100.0,
+            step=1.0,
+            key="cust_rh",
+        )
 
-    col_w4, col_w5, col_btn_wrap = st.columns([1.2, 1.2, 1.0])
+    col_w4, col_w5 = st.columns(2)
     with col_w4:
-        custom_wind = st.slider("Wind Speed (m/s)", min_value=0.0, max_value=25.0, value=3.5, step=0.1, key="cust_wind")
+        custom_wind = st.slider(
+            "Wind Speed (m/s)",
+            min_value=0.0,
+            max_value=25.0,
+            step=0.1,
+            key="cust_wind",
+        )
     with col_w5:
-        custom_precip = st.slider("Precipitation (mm)", min_value=0.0, max_value=150.0, value=0.0, step=0.5, key="cust_precip")
-    with col_btn_wrap:
-        st.html("<div style='height: 28px;'></div>")
+        custom_precip = st.slider(
+            "Precipitation (mm)",
+            min_value=0.0,
+            max_value=150.0,
+            step=0.5,
+            key="cust_precip",
+        )
+
+    st.html("<div style='height: 12px;'></div>")
+    col_b1, col_b2 = st.columns([1, 2.5])
+    with col_b1:
+        if st.button("🔄 Sync Live API", use_container_width=True, key="btn_resync_api", help="Re-sync inputs with today's live API telemetry"):
+            st.session_state["custom_inputs_loaded_for"] = None
+            st.rerun()
+    with col_b2:
         btn_mode2 = st.button("🧪 Predict Custom Scenario", type="primary", use_container_width=True, key="btn_mode2")
 
-# ------------------------------------------------------------------------------
-# 5. Prediction Execution & State Management
-# ------------------------------------------------------------------------------
-# Determine which mode was triggered
-if btn_mode1:
-    st.session_state["pred_mode"] = "live"
-    st.session_state["active_district"] = sel_dist_mode1
-elif btn_mode2:
-    st.session_state["pred_mode"] = "custom"
-    st.session_state["active_district"] = sel_dist_mode2
-
-# Execute prediction if triggered or not in session state
-run_prediction = (btn_mode1 or btn_mode2) or ("prediction_result" not in st.session_state)
-
-if run_prediction:
-    target_district = st.session_state["active_district"]
-    use_live = (st.session_state.get("pred_mode", "live") == "live")
-
-    # Mode 2 Input Validation
-    if not use_live:
+    # Mode 2 execution: only runs on explicit button press or initial load
+    if btn_mode2 or ("mode2_result" not in st.session_state):
         if custom_min_t >= custom_max_t:
-            st.error(f"⚠️ Validation Error: Minimum temperature ({custom_min_t}°C) cannot be greater than or equal to Maximum temperature ({custom_max_t}°C).")
-            st.stop()
-        arg_date = custom_date.strftime("%Y-%m-%d")
-        arg_max_t = custom_max_t
-        arg_min_t = custom_min_t
-        arg_rh = custom_rh
-        arg_wind = custom_wind
-        arg_precip = custom_precip
-    else:
-        arg_date = datetime.now().strftime("%Y-%m-%d")
-        arg_max_t = None
-        arg_min_t = None
-        arg_rh = None
-        arg_wind = None
-        arg_precip = None
+            st.session_state["mode2_error"] = f"⚠️ Validation Error: Minimum temperature ({custom_min_t}°C) cannot be greater than or equal to Maximum temperature ({custom_max_t}°C)."
+            st.session_state["mode2_result"] = None
+        else:
+            with st.spinner(f"Ingesting custom atmospheric parameters and executing multi-champion models for {sel_dist_mode2}..."):
+                try:
+                    res2 = predict_heatwave(
+                        district=sel_dist_mode2,
+                        date_str=custom_date.strftime("%Y-%m-%d"),
+                        max_temp_c=custom_max_t,
+                        min_temp_c=custom_min_t,
+                        humidity_pct=custom_rh,
+                        wind_speed_ms=custom_wind,
+                        precipitation_mm=custom_precip,
+                        use_live_api=(custom_date == datetime.now().date()),
+                    )
+                    st.session_state["mode2_result"] = res2
+                    st.session_state["mode2_error"] = None
+                except Exception as e:
+                    st.session_state["mode2_error"] = f"Forecast Generation Failed: {e}"
 
-    with st.spinner(f"Ingesting atmospheric parameters and executing multi-champion models for {target_district}..."):
-        try:
-            res = predict_heatwave(
-                district=target_district,
-                date_str=arg_date,
-                max_temp_c=arg_max_t,
-                min_temp_c=arg_min_t,
-                humidity_pct=arg_rh,
-                wind_speed_ms=arg_wind,
-                precipitation_mm=arg_precip,
-                use_live_api=use_live,
-            )
-            st.session_state["prediction_result"] = res
-            st.session_state["last_district"] = target_district
-        except Exception as e:
-            st.error(f"Forecast Generation Failed: {e}")
-            st.stop()
-
-result = st.session_state["prediction_result"]
-w = result["input_weather"]
-district_name = result["district"]
-d_info = DISTRICT_METADATA[district_name]
-
-# Dates
-obs_date = datetime.strptime(result["forecast_date"], "%Y-%m-%d").date()
-tomorrow_date = obs_date + timedelta(days=1)
-today_str = obs_date.strftime("%d %b %Y")
-tomorrow_str = tomorrow_date.strftime("%d %b %Y")
-
-# Today's deterministic ground-truth status
-today_max = w["max_temp_c"]
-today_eval = evaluate_today_observed_status(today_max)
-
-# Tomorrow's AI Model predictions
-is_alert_tomorrow = result["heatwave_alert"]
-prob_tomorrow = result["alert_probability"]
-tier_tomorrow = result["severity_tier"]
-pred_temp_tomorrow = result["predicted_max_temp_c"]
-tomorrow_threat = get_threat_profile(tier_tomorrow)
-
-# Temperature shift
-delta_t = round(pred_temp_tomorrow - today_max, 2)
-delta_sign = "+" if delta_t >= 0 else ""
-delta_str = f"{delta_sign}{delta_t:.1f}°C"
+    # Render Mode 2's isolated results and inputs
+    if st.session_state.get("mode2_error"):
+        st.error(st.session_state["mode2_error"])
+    elif st.session_state.get("mode2_result"):
+        render_prediction_dashboard(st.session_state["mode2_result"], is_custom_mode=True)
 
 # ------------------------------------------------------------------------------
-# 6. Today's Weather Conditions
-# ------------------------------------------------------------------------------
-st.markdown("---")
-feels_like_max = compute_feels_like(w["max_temp_c"], w["humidity_pct"], w["wind_speed_ms"])
-diurnal_diff = round(w["max_temp_c"] - w["min_temp_c"], 1)
-
-st.html(
-    f"""
-    <div class="conditions-container" style="margin-top: 10px;">
-        <div class="section-title-wrap">
-            <span>📊 Today's Weather Conditions • {district_name} ({today_str})</span>
-        </div>
-        <div class="weather-tiles-grid">
-            <div class="weather-tile">
-                <div class="tile-kicker">Max Temperature</div>
-                <div class="tile-value-num mono">{w['max_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
-                <div class="tile-footnote">Daytime peak thermometer</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Min Temperature</div>
-                <div class="tile-value-num mono">{w['min_temp_c']:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
-                <div class="tile-footnote">Diurnal Gap: <b class="mono">+{diurnal_diff}°C</b></div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Feels-Like Temp</div>
-                <div class="tile-value-num mono" style="color:#ea580c;">{feels_like_max:.1f} <span style="font-size:15px; color:#64748b;">°C</span></div>
-                <div class="tile-footnote">Steadman Apparent Index</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Relative Humidity</div>
-                <div class="tile-value-num mono">{w['humidity_pct']:.1f} <span style="font-size:15px; color:#64748b;">%</span></div>
-                <div class="tile-footnote">Peak afternoon moisture</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Wind Speed</div>
-                <div class="tile-value-num mono">{w['wind_speed_ms']:.2f} <span style="font-size:15px; color:#64748b;">m/s</span></div>
-                <div class="tile-footnote">Atmospheric circulation</div>
-            </div>
-            <div class="weather-tile">
-                <div class="tile-kicker">Precipitation</div>
-                <div class="tile-value-num mono">{w['precipitation_mm']:.1f} <span style="font-size:15px; color:#64748b;">mm</span></div>
-                <div class="tile-footnote">24-hour recorded rainfall</div>
-            </div>
-        </div>
-    </div>
-    """
-)
-
-# ------------------------------------------------------------------------------
-# 7. Tomorrow's Heatwave Forecast (24-Hour AI Prediction)
-# ------------------------------------------------------------------------------
-st.html("<div class='section-title-wrap' style='margin-top: 26px;'>🎯 Tomorrow's Heatwave Forecast (24-Hour AI Prediction)</div>")
-
-col_r1, col_r2, col_r3 = st.columns(3)
-
-# --- Heatwave Status ---
-with col_r1:
-    if is_alert_tomorrow:
-        hw_status_text = "HOT"
-        hw_sub_label = "Heatwave Alert Active"
-        hw_color = "#dc2626"
-        hw_bg = "#fef2f2"
-        hw_border = "#fecaca"
-        hw_icon = "⚠️"
-    else:
-        hw_status_text = "NORMAL"
-        hw_sub_label = "No Heatwave Expected"
-        hw_color = "#059669"
-        hw_bg = "#ecfdf5"
-        hw_border = "#a7f3d0"
-        hw_icon = "✅"
-
-    st.html(
-        f"""
-        <div class="result-card" style="border-top: 5px solid {hw_color};">
-            <div class="result-card-kicker">Heatwave Status • Tomorrow ({tomorrow_str})</div>
-            <div class="status-display-large" style="color: {hw_color};">
-                <span>{hw_icon}</span>
-                <span>{hw_status_text}</span>
-            </div>
-            <div style="font-size:13.5px; font-weight:700; color:{hw_color}; margin-bottom:12px;">
-                {hw_sub_label}
-            </div>
-            <div style="font-size:12.5px; font-weight:600; color:#475569;">
-                Heatwave Probability: <b class="mono" style="color:{hw_color};">{prob_tomorrow * 100:.1f}%</b>
-            </div>
-        </div>
-        """
-    )
-
-# --- Heatwave Threat Level ---
-with col_r2:
-    st.html(
-        f"""
-        <div class="result-card" style="border-top: 5px solid {tomorrow_threat['color']};">
-            <div class="result-card-kicker">Heatwave Threat Level • Tomorrow ({tomorrow_str})</div>
-            <div style="margin-top: 14px;">
-                <div class="threat-badge-pill" style="background:{tomorrow_threat['bg']}; color:{tomorrow_threat['text']}; border:1.5px solid {tomorrow_threat['border']}; margin-bottom:0;">
-                    <span>●</span> <span>{tomorrow_threat['label']}</span>
-                </div>
-            </div>
-        </div>
-        """
-    )
-
-# --- Predicted Temperature ---
-with col_r3:
-    temp_color = tomorrow_threat['color']
-    trend_bg = "#fee2e2" if delta_t > 0.5 else ("#ecfdf5" if delta_t < -0.5 else "#f1f5f9")
-    trend_color = "#991b1b" if delta_t > 0.5 else ("#065f46" if delta_t < -0.5 else "#475569")
-
-    st.html(
-        f"""
-        <div class="result-card" style="border-top: 5px solid {temp_color};">
-            <div class="result-card-kicker">Predicted High Temperature • Tomorrow ({tomorrow_str})</div>
-            <div class="temp-hero-display">
-                <span style="font-size:32px; margin-right:4px;">🌡️</span>
-                <span class="temp-val-hero mono" style="color: {temp_color};">{pred_temp_tomorrow:.2f}</span>
-                <span class="temp-unit-hero">°C</span>
-            </div>
-            <div class="trend-indicator-pill" style="background:{trend_bg}; color:{trend_color};">
-                <span>24h Trend: <b>{delta_str}</b> vs today ({today_max:.1f}°C)</span>
-            </div>
-        </div>
-        """
-    )
-
-# ------------------------------------------------------------------------------
-# 8. Today vs Tomorrow Comparison Section
-# ------------------------------------------------------------------------------
-today_status_badge = (
-    f'<span style="background:{today_eval["bg"]}; color:{today_eval["text"]}; '
-    f'border:1px solid {today_eval["border"]}; padding:4px 10px; border-radius:999px; '
-    f'font-weight:800; font-size:12px;">'
-    f'{"⚠️ " + today_eval["status_short"] if today_eval["is_hot"] else "✅ " + today_eval["status_short"]}'
-    f'</span>'
-)
-
-tomorrow_status_badge = (
-    f'<span style="background:{"#fef2f2" if is_alert_tomorrow else "#ecfdf5"}; '
-    f'color:{"#991b1b" if is_alert_tomorrow else "#065f46"}; '
-    f'border:1px solid {"#fecaca" if is_alert_tomorrow else "#a7f3d0"}; '
-    f'padding:4px 10px; border-radius:999px; font-weight:800; font-size:12px;">'
-    f'{"⚠️ HOT" if is_alert_tomorrow else "✅ NORMAL"} ({prob_tomorrow * 100:.1f}%)'
-    f'</span>'
-)
-
-today_threat_badge = (
-    f'<span style="background:{today_eval["bg"]}; color:{today_eval["text"]}; '
-    f'border:1px solid {today_eval["border"]}; padding:4px 10px; border-radius:999px; '
-    f'font-weight:700; font-size:12px;">'
-    f'{today_eval["threat_label"]}'
-    f'</span>'
-)
-
-tomorrow_threat_badge = (
-    f'<span style="background:{tomorrow_threat["bg"]}; color:{tomorrow_threat["text"]}; '
-    f'border:1px solid {tomorrow_threat["border"]}; padding:4px 10px; border-radius:999px; '
-    f'font-weight:700; font-size:12px;">'
-    f'{tomorrow_threat["label"]}'
-    f'</span>'
-)
-
-st.html(
-    f"""
-    <div class="comparison-container" style="margin-top: 26px;">
-        <div class="comparison-header">
-            <div>⚖️ Today vs Tomorrow Meteorological Comparison • {district_name}</div>
-        </div>
-        <div class="comparison-grid">
-            <div class="comp-pane" style="border-left: 4px solid {today_eval['color']};">
-                <div class="comp-pane-title">
-                    <span>📅 TODAY ({today_str})</span>
-                </div>
-                <div class="comp-row">
-                    <span class="comp-label">Heatwave Status</span>
-                    <span class="comp-val">{today_status_badge}</span>
-                </div>
-                <div class="comp-row">
-                    <span class="comp-label">Heatwave Threat Level</span>
-                    <span class="comp-val">{today_threat_badge}</span>
-                </div>
-                <div class="comp-row">
-                    <span class="comp-label">Max Temperature</span>
-                    <span class="comp-val mono" style="font-size:16px; color:{today_eval['color']}; font-weight:800;">{today_max:.1f} °C</span>
-                </div>
-            </div>
-            <div class="comp-pane" style="border-left: 4px solid {tomorrow_threat['color']};">
-                <div class="comp-pane-title">
-                    <span>🔮 TOMORROW PREDICTION ({tomorrow_str})</span>
-                </div>
-                <div class="comp-row">
-                    <span class="comp-label">Heatwave Status</span>
-                    <span class="comp-val">{tomorrow_status_badge}</span>
-                </div>
-                <div class="comp-row">
-                    <span class="comp-label">Heatwave Threat Level</span>
-                    <span class="comp-val">{tomorrow_threat_badge}</span>
-                </div>
-                <div class="comp-row">
-                    <span class="comp-label">Max Temperature</span>
-                    <span class="comp-val mono" style="font-size:16px; color:{tomorrow_threat['color']}; font-weight:800;">{pred_temp_tomorrow:.2f} °C <span style="font-size:12px; font-weight:600; color:{trend_color};">({delta_str})</span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    """
-)
-
-# ------------------------------------------------------------------------------
-# 9. Operational Footer
+# 6. Operational Footer
 # ------------------------------------------------------------------------------
 st.markdown("---")
 st.html(
