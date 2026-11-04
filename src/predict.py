@@ -737,10 +737,6 @@ def predict_heatwave(
 # 5. CLI Demonstration & Stress Testing
 # ==============================================================================
 def main() -> None:
-    print("=" * 80)
-    print(">>> NEPAL TERAI HEATWAVE PREDICTION SYSTEM: LIVE PRODUCTION INFERENCE")
-    print("=" * 80)
-
     # Demo 1: Full Automated Live API Prediction (Zero Typing!)
     print("\n[Scenario 1] 100% Automated Live API Forecast for Banke (Nepalgunj)")
     res1 = predict_heatwave(district="Banke", use_live_api=True)
@@ -780,10 +776,6 @@ def main() -> None:
     print(f"Injected Input:  Flag={f_in[0]}, Severity={s_in[0]}, Temp={t_in[0]}°C")
     print(f"Enforced Output: Flag={f_out[0]}, Severity={s_out[0]}, Temp={t_out[0]:.2f}°C")
     print(f"Enforcer Action: {actions[0]}")
-
-    print("\n" + "=" * 80)
-    print(">>> PREDICTION ENGINE VALIDATED AND READY FOR PRODUCTION")
-    print("=" * 80)
 
 
 if __name__ == "__main__":

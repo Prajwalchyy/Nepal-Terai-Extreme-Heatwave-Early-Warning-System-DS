@@ -1,0 +1,29 @@
+# ==============================================================================
+# Nepal Terai Extreme Heatwave Early-Warning System (2000-2026)
+# Core Production & Inference Dependencies
+# ==============================================================================
+
+# Core Scientific & Numerical Processing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+pyarrow>=14.0.0
+
+# Machine Learning & Gradient Boosting Champions
+scikit-learn>=1.3.0
+lightgbm>=4.0.0
+xgboost>=2.0.0
+joblib>=1.3.0
+
+# Interactive Web Application Prototype
+streamlit>=1.30.0
+
+# Live Meteorological API Ingestion & Networking
+requests>=2.31.0
+urllib3>=2.0.0
+
+# Diagnostic Visualization & Model Explainability
+matplotlib>=3.7.0
+seaborn>=0.12.0
+shap>=0.42.0
+
